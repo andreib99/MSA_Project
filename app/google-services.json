@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "288210910011",
+    "project_id": "nutrimax-fa72b",
+    "storage_bucket": "nutrimax-fa72b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:288210910011:android:9c20ae456b5278aeded51e",
+        "android_client_info": {
+          "package_name": "com.fitboys.nutrimax"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "288210910011-q15qlk66l5b187u2gsa8st8j5harc0c4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD7BWmG-lOvxdv0Jeh8qUKXmDhrf8NqiXA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "288210910011-q15qlk66l5b187u2gsa8st8j5harc0c4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
