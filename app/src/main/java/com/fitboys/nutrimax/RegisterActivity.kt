@@ -1,16 +1,19 @@
 package com.fitboys.nutrimax
 
+import android.content.ContentValues.TAG
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.TextView
 import com.google.firebase.auth.FirebaseAuth
 import android.os.Bundle
 import android.content.Intent
 import android.text.TextUtils
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import com.fitboys.nutrimax.data.model.User
+import com.fitboys.nutrimax.helpers.ActivityLevel
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import java.util.*
@@ -71,6 +74,7 @@ class RegisterActivity : AppCompatActivity() {
             else -> {
                 mAuth!!.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task ->
                     if (task.isSuccessful) {
+                        create_user_database(username, email)
                         Toast.makeText(
                             this@RegisterActivity,
                             "User registered successfully",
@@ -88,4 +92,34 @@ class RegisterActivity : AppCompatActivity() {
             }
         }
     }
+
+    private fun create_user_database(username: String, email: String){
+
+        val db = Firebase.firestore
+
+        val user = User(
+                username = username,
+                email = email,
+                isNutritionist = false,
+                isAdmin = false,
+                gender = "male",
+                weight = 70,
+                height = 170,
+                age = 20,
+                activityLevel = ActivityLevel.LIGHTLY_ACTIVE,
+                caloriesIntake = 3000
+            )
+
+        mAuth?.currentUser?.uid?.let {
+            db.collection("users")
+                .document(it).set(user)
+                .addOnSuccessListener {
+                    Log.d(TAG, "DocumentSnapshot added")
+                }
+                .addOnFailureListener { e ->
+                    Log.w(TAG, "Error adding document", e)
+                }
+        }
+    }
+
 }

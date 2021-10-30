@@ -1,5 +1,6 @@
 package com.fitboys.nutrimax
 
+import android.content.ContentValues.TAG
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.view.View
@@ -8,6 +9,7 @@ import android.widget.Toast
 import android.content.Intent
 
 import android.text.TextUtils
+import android.util.Log
 
 import com.google.firebase.auth.FirebaseAuth
 
@@ -15,6 +17,8 @@ import android.widget.Button
 import android.widget.EditText
 
 import android.widget.TextView
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 
 class LoginActivity : AppCompatActivity() {
@@ -30,6 +34,7 @@ class LoginActivity : AppCompatActivity() {
             val btnLogin = findViewById<Button>(R.id.btnLogin)
 
             mAuth = FirebaseAuth.getInstance()
+            val db = Firebase.firestore
 
             btnLogin.setOnClickListener { view -> loginUser(etLoginEmail, etLoginPassword) }
 
