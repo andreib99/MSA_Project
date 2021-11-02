@@ -1,6 +1,5 @@
 package com.fitboys.nutrimax
 
-import android.content.ContentValues.TAG
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.view.View
@@ -9,7 +8,6 @@ import android.widget.Toast
 import android.content.Intent
 
 import android.text.TextUtils
-import android.util.Log
 
 import com.google.firebase.auth.FirebaseAuth
 
