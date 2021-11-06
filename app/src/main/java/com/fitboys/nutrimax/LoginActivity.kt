@@ -1,5 +1,6 @@
 package com.fitboys.nutrimax
 
+import android.content.ContentValues.TAG
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.view.View
@@ -8,6 +9,7 @@ import android.widget.Toast
 import android.content.Intent
 
 import android.text.TextUtils
+import android.util.Log
 
 import com.google.firebase.auth.FirebaseAuth
 
@@ -15,6 +17,7 @@ import android.widget.Button
 import android.widget.EditText
 
 import android.widget.TextView
+import com.fitboys.nutrimax.data.model.User
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
@@ -56,6 +59,7 @@ class LoginActivity : AppCompatActivity() {
                 etLoginPassword.error = "Password cannot be empty"
                 etLoginPassword.requestFocus()
             } else {
+
                 mAuth!!.signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         Toast.makeText(
@@ -63,7 +67,44 @@ class LoginActivity : AppCompatActivity() {
                             "User logged in successfully",
                             Toast.LENGTH_SHORT
                         ).show()
-                        startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+
+                        val db = Firebase.firestore
+                        mAuth?.currentUser?.uid?.let {
+                            db.collection("users")
+                                .document(it).get().addOnSuccessListener { document ->
+                                    if (document != null)
+                                    {
+                                        Log.d(TAG, "DocumentSnapshot data: ${document.data}")
+                                        val calories = document.data?.get("caloriesIntake").toString()
+                                        Log.d(TAG, "Calories: ${calories}")
+                                        if(calories == "0")
+                                        {Log.d(TAG, "Calories: ${calories}")
+                                            startActivity(
+                                                Intent(
+                                                    this@LoginActivity,
+                                                    CaloriesCalculatorActivity::class.java
+                                                )
+                                            )
+                                        }
+                                        else
+                                        {Log.d(TAG, "DocumentSnapshot data2: ${document.data?.get("caloriesIntake")}")
+                                            startActivity(
+                                                Intent(
+                                                    this@LoginActivity,
+                                                    HomeActivity::class.java
+                                                )
+                                            )
+                                        }
+                                    }
+                                    else
+                                    {
+                                        Log.d(TAG, "No such document")
+                                    }
+                                }
+                                .addOnFailureListener { exception ->
+                                    Log.d(TAG, "get failed with ", exception)
+                                }
+                        }
                     } else {
                         Toast.makeText(
                             this@LoginActivity,

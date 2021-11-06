@@ -107,7 +107,8 @@ class RegisterActivity : AppCompatActivity() {
                 height = 170,
                 age = 20,
                 activityLevel = ActivityLevel.LIGHTLY_ACTIVE,
-                caloriesIntake = 3000
+                target = "maintain",
+                caloriesIntake = 0
             )
 
         mAuth?.currentUser?.uid?.let {
