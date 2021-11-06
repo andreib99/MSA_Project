@@ -17,7 +17,6 @@ import android.widget.Button
 import android.widget.EditText
 
 import android.widget.TextView
-import com.fitboys.nutrimax.data.model.User
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 

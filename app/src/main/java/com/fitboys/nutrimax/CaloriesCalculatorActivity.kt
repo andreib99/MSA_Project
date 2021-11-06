@@ -18,11 +18,7 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import java.util.*
 import android.widget.ArrayAdapter
-import android.widget.AdapterView
-
-import android.widget.Toast
 import android.widget.TextView
-import com.fitboys.nutrimax.helpers.ActivityLevel
 
 
 class CaloriesCalculatorActivity : AppCompatActivity() {

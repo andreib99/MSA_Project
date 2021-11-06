@@ -1,7 +1,5 @@
 package com.fitboys.nutrimax.data.model
 
-import com.fitboys.nutrimax.helpers.ActivityLevel
-
 data class User (
     val username: String,
     val email: String,
@@ -11,7 +9,7 @@ data class User (
     val weight: Int,
     val height: Int,
     val age: Int,
-    val activityLevel: ActivityLevel,
+    val activityLevel: String,
     val target: String,
     val caloriesIntake: Int
         )
