@@ -1,32 +1,22 @@
 package com.fitboys.nutrimax
 
 import android.content.Intent
-
-import androidx.core.content.ContextCompat.startActivity
-
-import com.google.firebase.auth.FirebaseUser
-
-import com.google.firebase.auth.FirebaseAuth
-
-
 import android.os.Bundle
 import android.widget.Button
-
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.auth.FirebaseAuth
 
-
-class MainActivity : AppCompatActivity() {
-
+class HomeActivity : AppCompatActivity() {
     private var mAuth: FirebaseAuth? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_home)
         val btnLogOut = findViewById<Button>(R.id.btnLogout)
         mAuth = FirebaseAuth.getInstance()
         btnLogOut.setOnClickListener { view ->
             mAuth!!.signOut()
-            startActivity(Intent(this@MainActivity, LoginActivity::class.java))
+            startActivity(Intent(this@HomeActivity, LoginActivity::class.java))
         }
     }
 
@@ -34,7 +24,7 @@ class MainActivity : AppCompatActivity() {
         super.onStart()
         val user = mAuth!!.currentUser
         if (user == null) {
-            startActivity(Intent(this@MainActivity, LoginActivity::class.java))
+            startActivity(Intent(this@HomeActivity, LoginActivity::class.java))
         }
     }
 }

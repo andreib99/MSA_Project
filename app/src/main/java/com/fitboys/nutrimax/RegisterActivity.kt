@@ -13,7 +13,6 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import com.fitboys.nutrimax.data.model.User
-import com.fitboys.nutrimax.helpers.ActivityLevel
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import java.util.*
@@ -106,8 +105,9 @@ class RegisterActivity : AppCompatActivity() {
                 weight = 70,
                 height = 170,
                 age = 20,
-                activityLevel = ActivityLevel.LIGHTLY_ACTIVE,
-                caloriesIntake = 3000
+                activityLevel = "lightly active",
+                target = "maintain",
+                caloriesIntake = 0
             )
 
         mAuth?.currentUser?.uid?.let {
