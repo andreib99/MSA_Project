@@ -11,6 +11,8 @@ data class User (
     val age: Int,
     val activityLevel: String,
     val target: String,
-    val caloriesIntake: Int
+    val caloriesIntake: Int,
+    val remainingCalories: Int,
+    val last_activity: String
         )
 

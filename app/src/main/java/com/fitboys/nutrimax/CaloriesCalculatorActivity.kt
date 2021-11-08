@@ -137,7 +137,8 @@ class CaloriesCalculatorActivity : AppCompatActivity() {
                                 "age" to age,
                                 "gender" to gender,
                                 "activityLevel" to activity_level,
-                                "caloriesIntake" to result_calories
+                                "caloriesIntake" to result_calories,
+                                "remainingCalories" to result_calories,
                             )
                         )
                         .addOnSuccessListener {
@@ -201,6 +202,14 @@ class CaloriesCalculatorActivity : AppCompatActivity() {
         }
 
         return calories
+    }
+
+    override fun onStart() {
+        super.onStart()
+        val user = mAuth!!.currentUser
+        if (user == null) {
+            startActivity(Intent(this@CaloriesCalculatorActivity, LoginActivity::class.java))
+        }
     }
 
 }

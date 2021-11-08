@@ -6,21 +6,26 @@ import android.widget.TextView
 import com.google.firebase.auth.FirebaseAuth
 import android.os.Bundle
 import android.content.Intent
+import android.os.Build
 import android.text.TextUtils
 import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import com.fitboys.nutrimax.data.model.User
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 class RegisterActivity : AppCompatActivity() {
 
     private var mAuth: FirebaseAuth? = null
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
@@ -43,6 +48,7 @@ class RegisterActivity : AppCompatActivity() {
         })
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun createUser(etRegUsername: EditText, etRegEmail: EditText, etRegPassword: EditText, etRegPassword_Verification: EditText) {
         val username = Objects.requireNonNull(etRegUsername.text).toString()
         val email = Objects.requireNonNull(etRegEmail.text).toString()
@@ -73,10 +79,11 @@ class RegisterActivity : AppCompatActivity() {
             else -> {
                 mAuth!!.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task ->
                     if (task.isSuccessful) {
+                        mAuth!!.currentUser?.sendEmailVerification()
                         create_user_database(username, email)
                         Toast.makeText(
                             this@RegisterActivity,
-                            "User registered successfully",
+                            "User registered successfully. Please verify your account!",
                             Toast.LENGTH_SHORT
                         ).show()
                         startActivity(Intent(this@RegisterActivity, LoginActivity::class.java))
@@ -92,9 +99,13 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun create_user_database(username: String, email: String){
 
         val db = Firebase.firestore
+
+        val currentDateTime = LocalDateTime.now()
+
 
         val user = User(
                 username = username,
@@ -107,7 +118,9 @@ class RegisterActivity : AppCompatActivity() {
                 age = 20,
                 activityLevel = "lightly active",
                 target = "maintain",
-                caloriesIntake = 0
+                caloriesIntake = 0,
+                remainingCalories = 0,
+                last_activity = currentDateTime.format(DateTimeFormatter.ISO_DATE)
             )
 
         mAuth?.currentUser?.uid?.let {
