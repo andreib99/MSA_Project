@@ -39,7 +39,7 @@
             <LinearLayout
                 android:id="@+id/register_form"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:orientation="vertical">
 
@@ -56,7 +56,7 @@
                 <EditText
                     android:id="@+id/etRegUsername"
                     android:layout_width="match_parent"
-                    android:layout_height="76dp"
+                    android:layout_height="60dp"
                     android:layout_gravity="center"
                     android:layout_marginStart="15dp"
                     android:layout_marginLeft="15dp"
@@ -80,7 +80,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etRegEmail"
                     android:layout_width="match_parent"
-                    android:layout_height="76dp"
+                    android:layout_height="60dp"
                     android:layout_gravity="center"
                     android:layout_marginStart="15dp"
                     android:layout_marginLeft="15dp"
@@ -104,7 +104,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etRegPass"
                     android:layout_width="match_parent"
-                    android:layout_height="76dp"
+                    android:layout_height="60dp"
                     android:layout_gravity="center"
                     android:layout_marginStart="15dp"
                     android:layout_marginLeft="15dp"
@@ -129,7 +129,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etRegPass_Verification"
                     android:layout_width="match_parent"
-                    android:layout_height="76dp"
+                    android:layout_height="60dp"
                     android:layout_gravity="center"
                     android:layout_marginStart="15dp"
                     android:layout_marginLeft="15dp"
