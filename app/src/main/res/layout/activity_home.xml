@@ -40,5 +40,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/recordFood" />
 
+    <Button
+        android:id="@+id/buttonCalculator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Calculator"
+        tools:layout_editor_absoluteX="155dp"
+        tools:layout_editor_absoluteY="528dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recordFood" />/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
