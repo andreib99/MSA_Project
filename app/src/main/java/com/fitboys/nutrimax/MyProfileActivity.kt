@@ -11,7 +11,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
-class HomeActivity : AppCompatActivity() {
+class MyProfileActivity : AppCompatActivity() {
     private var mAuth: FirebaseAuth? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,11 +35,11 @@ class HomeActivity : AppCompatActivity() {
                 }
 
             recordFood.setOnClickListener { view ->
-                startActivity(Intent(this@HomeActivity, FoodListActivity::class.java))
+                startActivity(Intent(this@MyProfileActivity, FoodListActivity::class.java))
             }
 
             addFood.setOnClickListener { view ->
-                startActivity(Intent(this@HomeActivity, AddFoodActivity::class.java))
+                startActivity(Intent(this@MyProfileActivity, AddFoodActivity::class.java))
             }
         }
     }
@@ -48,7 +48,7 @@ class HomeActivity : AppCompatActivity() {
         super.onStart()
         val user = mAuth!!.currentUser
         if (user == null) {
-            startActivity(Intent(this@HomeActivity, LoginActivity::class.java))
+            startActivity(Intent(this@MyProfileActivity, LoginActivity::class.java))
         }
     }
 }
