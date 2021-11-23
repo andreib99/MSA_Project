@@ -20,7 +20,6 @@ class HomeActivity : AppCompatActivity() {
         val calories = findViewById<TextView>(R.id.calories)
         val recordFood = findViewById<Button>(R.id.recordFood)
         val addFood = findViewById<Button>(R.id.addFood)
-        val calculator=findViewById<Button>(R.id.buttonCalculator)
         mAuth = FirebaseAuth.getInstance()
 
         val db = Firebase.firestore
@@ -41,9 +40,6 @@ class HomeActivity : AppCompatActivity() {
 
             addFood.setOnClickListener { view ->
                 startActivity(Intent(this@HomeActivity, AddFoodActivity::class.java))
-            }
-            calculator.setOnClickListener{view ->
-                startActivity(Intent(this@HomeActivity,CaloriesCalculatorActivity::class.java))
             }
         }
     }
