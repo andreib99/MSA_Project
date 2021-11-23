@@ -31,4 +31,7 @@
         <item>Maintain</item>
         <item>Gain weight</item>
     </string-array>
+    <string name="username">Username</string>
+    <string name="confirm_password">Confirm password</string>
+    <string name="register">Register</string>
 </resources>
