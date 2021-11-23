@@ -19,61 +19,36 @@ import com.google.firebase.ktx.Firebase
 import java.util.*
 import android.widget.ArrayAdapter
 import android.widget.TextView
+import androidx.core.content.ContentProviderCompat.requireContext
 
 
 class CaloriesCalculatorActivity : AppCompatActivity() {
 
     private var mAuth: FirebaseAuth? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_calories_calculator)
+    override fun onResume(){
+        super.onResume();
+
+        val btnCalculate = findViewById<Button>(R.id.btnCalculate)
         val etWeight = findViewById<EditText>(R.id.etWeight)
         val etHeight = findViewById<EditText>(R.id.etHeight)
         val etAge = findViewById<EditText>(R.id.etAge)
-        val etGender = findViewById<Spinner>(R.id.etGender)
-        val etActivity_Level = findViewById<Spinner>(R.id.etActivity_Level)
-        val etTarget = findViewById<Spinner>(R.id.etTarget)
-        val btnCalculate = findViewById<Button>(R.id.btnCalculate)
-        mAuth = FirebaseAuth.getInstance()
+        val tvActivityLevel=findViewById<AutoCompleteTextView>(R.id.tvActivityLevel)
+        val tvGender=findViewById<AutoCompleteTextView>(R.id.tvGender)
+        val tvTarget=findViewById<AutoCompleteTextView>(R.id.tvTarget)
 
-        //Gender possible options
-        val GenderOptions: MutableList<String?> = ArrayList()
-        GenderOptions.add(0, "Gender...")
-        GenderOptions.add("Male")
-        GenderOptions.add("Female")
-
-        val arrayAdapter: ArrayAdapter<String?> =
-            ArrayAdapter<String?>(this, android.R.layout.simple_list_item_1, GenderOptions)
-        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        etGender.adapter = arrayAdapter
-
-        //activity level possible options
-        val ActivityOptions: MutableList<String?> = ArrayList()
-        ActivityOptions.add(0, "Activity level...")
-        ActivityOptions.add("Sedentary")
-        ActivityOptions.add("Lightly active")
-        ActivityOptions.add("Active")
-        ActivityOptions.add("Very active")
-
-        val arrayAdapter1: ArrayAdapter<String?> =
-            ArrayAdapter<String?>(this, android.R.layout.simple_list_item_1, ActivityOptions)
-        arrayAdapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        etActivity_Level.adapter = arrayAdapter1
+        val activityLevels = resources.getStringArray(R.array.activity_levels)
+        val activityAdapter = ArrayAdapter(this,R.layout.dropdown_item,activityLevels)
+        tvActivityLevel.setAdapter(activityAdapter)
 
 
-        //Target possible options
-        val TargetOptions: MutableList<String?> = ArrayList()
-        TargetOptions.add(0, "Target...")
-        TargetOptions.add("Lose weight")
-        TargetOptions.add("Maintain")
-        TargetOptions.add("Gain weight")
+        val genderList=resources.getStringArray(R.array.gender_list)
+        val genderAdapter = ArrayAdapter(this,R.layout.dropdown_item,genderList)
+        tvGender.setAdapter(genderAdapter)
 
-        val arrayAdapter2: ArrayAdapter<String?> =
-            ArrayAdapter<String?>(this, android.R.layout.simple_list_item_1, TargetOptions)
-        arrayAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        etTarget.adapter = arrayAdapter2
-
+        val targetList=resources.getStringArray(R.array.target_list)
+        val targetAdapter = ArrayAdapter(this,R.layout.dropdown_item,targetList)
+        tvTarget.setAdapter(targetAdapter)
 
         //button press
         btnCalculate.setOnClickListener(View.OnClickListener { view: View? ->
@@ -81,27 +56,36 @@ class CaloriesCalculatorActivity : AppCompatActivity() {
                 etWeight,
                 etHeight,
                 etAge,
-                etGender,
-                etActivity_Level,
-                etTarget
+                tvGender,
+                tvActivityLevel,
+                tvTarget
             )
         })
+
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_calories_calculator)
+
+        mAuth = FirebaseAuth.getInstance()
+
     }
 
     private fun updateUserProfile(
         etWeight: EditText,
         etHeight: EditText,
         etAge: EditText,
-        etGender: Spinner,
-        etActivity_Level: Spinner,
-        etTarget: Spinner
+        tvGender: AutoCompleteTextView,
+        tvActivity_Level: AutoCompleteTextView,
+        tvTarget: AutoCompleteTextView
     ) {
         val weight = Objects.requireNonNull(etWeight.text).toString()
         val height = Objects.requireNonNull(etHeight.text).toString()
         val age = Objects.requireNonNull(etAge.text).toString()
-        val gender = Objects.requireNonNull(etGender.selectedItem).toString()
-        val activity_level = Objects.requireNonNull(etActivity_Level.selectedItem).toString()
-        val target = Objects.requireNonNull(etTarget.selectedItem).toString()
+        val gender = Objects.requireNonNull(tvGender.text).toString()
+        val activity_level = Objects.requireNonNull(tvActivity_Level.text).toString()
+        val target = Objects.requireNonNull(tvTarget.text).toString()
 
         when {
             TextUtils.isEmpty(weight) -> {
@@ -117,13 +101,13 @@ class CaloriesCalculatorActivity : AppCompatActivity() {
                 etAge.requestFocus()
             }
             gender == "Gender..." -> {
-                (etGender.selectedView as TextView).error = "Error message"
+                (tvGender as TextView).error = "Error message"
             }
             activity_level == "Activity level..." -> {
-                (etActivity_Level.selectedView as TextView).error = "Error message"
+                (tvActivity_Level as TextView).error = "Error message"
             }
             target == "Target..." -> {
-                (etTarget.selectedView as TextView).error = "Error message"
+                (tvTarget as TextView).error = "Error message"
             }
             else -> {
                 val result_calories = calculateCalories(weight, height, age, gender, activity_level, target)
