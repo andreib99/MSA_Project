@@ -6,6 +6,9 @@
         <entry key="..\:/Politehnica/Year_IV/Semestru_I/Mobile_Systems_Applications/Project/app/src/main/res/layout-w1240dp/activity_add_food.xml" value="0.12382864792503347" />
         <entry key="..\:/Politehnica/Year_IV/Semestru_I/Mobile_Systems_Applications/Project/app/src/main/res/layout-w1240dp/activity_login.xml" value="0.14089692101740295" />
         <entry key="..\:/Politehnica/Year_IV/Semestru_I/Mobile_Systems_Applications/Project/app/src/main/res/layout-w936dp/activity_login.xml" value="0.164453125" />
+        <entry key="..\:/Politehnica/Year_IV/Semestru_I/Mobile_Systems_Applications/Project/app/src/main/res/layout/activity_login.xml" value="0.21927083333333333" />
+        <entry key="..\:/Politehnica/Year_IV/Semestru_I/Mobile_Systems_Applications/Project/app/src/main/res/layout/activity_main.xml" value="0.17222222222222222" />
+        <entry key="..\:/Politehnica/Year_IV/Semestru_I/Mobile_Systems_Applications/Project/app/src/main/res/layout/activity_add_food.xml" value="0.1" />
         <entry key="..\:/Politehnica/Year_IV/Semestru_I/Mobile_Systems_Applications/Project/app/src/main/res/layout/activity_add-food.xml" value="0.19270833333333334" />
         <entry key="..\:/Politehnica/Year_IV/Semestru_I/Mobile_Systems_Applications/Project/app/src/main/res/layout/activity_calories_calculator.xml" value="0.25" />
         <entry key="..\:/Politehnica/Year_IV/Semestru_I/Mobile_Systems_Applications/Project/app/src/main/res/layout/activity_food_list.xml" value="0.19270833333333334" />
@@ -14,11 +17,25 @@
         <entry key="..\:/Politehnica/Year_IV/Semestru_I/Mobile_Systems_Applications/Project/app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/Politehnica/Year_IV/Semestru_I/Mobile_Systems_Applications/Project/app/src/main/res/layout/activity_register.xml" value="0.33" />
         <entry key="..\:/Users/Timotei/StudioProjects/MSA_Project/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2713541666666667" />
+        <entry key="..\:/Users/Timotei/StudioProjects/MSA_Project/app/src/main/res/drawable/backgroundimg.xml" value="1.5535714285714286" />
+        <entry key="..\:/Users/Timotei/StudioProjects/MSA_Project/app/src/main/res/drawable/backgroundimg.xml" value="1.5535714285714286" />
+        <entry key="..\:/Users/Timotei/StudioProjects/MSA_Project/app/src/main/res/drawable/ic_activity_foreground.xml" value="0.275" />
+        <entry key="..\:/Users/Timotei/StudioProjects/MSA_Project/app/src/main/res/drawable/ic_baseline_directions_run_24.xml" value="0.146875" />
         <entry key="..\:/Users/Timotei/StudioProjects/MSA_Project/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2713541666666667" />
+        <entry key="..\:/Users/Timotei/StudioProjects/MSA_Project/app/src/main/res/drawable/no_rounding_corners.xml" value="0.275" />
         <entry key="..\:/Users/Timotei/StudioProjects/MSA_Project/app/src/main/res/drawable/rounded_corner.xml" value="0.2713541666666667" />
+        <entry key="..\:/Users/Timotei/StudioProjects/MSA_Project/app/src/main/res/drawable/runner.xml" value="0.275" />
+        <entry key="..\:/Users/Timotei/StudioProjects/MSA_Project/app/src/main/res/layout/activity_calories_calculator.xml" value="0.2598958333333333" />
+        <entry key="..\:/Users/Timotei/StudioProjects/MSA_Project/app/src/main/res/layout/activity_home.xml" value="0.264" />
         <entry key="..\:/Users/Timotei/StudioProjects/MSA_Project/app/src/main/res/layout/activity_login.xml" value="0.2552083333333333" />
         <entry key="..\:/Users/Timotei/StudioProjects/MSA_Project/app/src/main/res/layout/activity_main.xml" value="0.2552083333333333" />
         <entry key="..\:/Users/Timotei/StudioProjects/MSA_Project/app/src/main/res/layout/activity_register.xml" value="0.2552083333333333" />
+        <entry key="..\:/Users/Timotei/StudioProjects/MSA_Project/app/src/main/res/layout/dropdown_item.xml" value="0.2" />
+        <entry key="..\:/Users/Timotei/StudioProjects/MSA_Project/app/src/main/res/layout/fragment_home_fragment.xml" value="0.17028985507246377" />
+        <entry key="..\:/Users/Timotei/StudioProjects/MSA_Project/app/src/main/res/layout/fragment_profile.xml" value="0.17028985507246377" />
+        <entry key="..\:/Users/Timotei/StudioProjects/MSA_Project/app/src/main/res/layout/fragment_settings.xml" value="0.17028985507246377" />
+        <entry key="..\:/Users/Timotei/StudioProjects/MSA_Project/app/src/main/res/menu/bottom_nav_menu.xml" value="0.19895833333333332" />
+        <entry key="..\:/Users/Timotei/StudioProjects/MSA_Project/app/src/main/res/mipmap-anydpi-v26/ic_activity.xml" value="0.146875" />
       </map>
     </option>
   </component>
