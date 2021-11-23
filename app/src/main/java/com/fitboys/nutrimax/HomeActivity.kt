@@ -19,7 +19,7 @@ class HomeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_home)
         val calories = findViewById<TextView>(R.id.calories)
         val recordFood = findViewById<Button>(R.id.recordFood)
-        val addFood = findViewById<Button>(R.id.Weight)
+        val addFood = findViewById<Button>(R.id.addFood)
         mAuth = FirebaseAuth.getInstance()
 
         val db = Firebase.firestore
