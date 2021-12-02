@@ -17,4 +17,29 @@
     <string name="text_spaces">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</string>
     <string name="record_meal">Record Meal</string>
     <string name="add_food">Add Food</string>
+    <string name="weight">Weight</string>
+    <string name="height">Height</string>
+    <string name="age">Age</string>
+    <string name="calculate">Calculate</string>
+    <string name="activity_level">Activity Level</string>
+    <string name="gender">Gender</string>
+    <string name="target">Target</string>
+    <string-array name="activity_levels">
+        <item>Sedentary</item>
+        <item>Lightly active</item>
+        <item>Active</item>
+        <item>Highly active</item>
+    </string-array>
+    <string-array name="gender_list">
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+    <string-array name="target_list">
+        <item>Lose weight</item>
+        <item>Maintain</item>
+        <item>Gain weight</item>
+    </string-array>
+    <string name="username">Username</string>
+    <string name="confirm_password">Confirm password</string>
+    <string name="register">Register</string>
 </resources>
