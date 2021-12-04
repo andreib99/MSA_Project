@@ -20,6 +20,7 @@
         <entry key="..\:/Users/Timotei/StudioProjects/MSA_Project/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2713541666666667" />
         <entry key="..\:/Users/Timotei/StudioProjects/MSA_Project/app/src/main/res/drawable/no_rounding_corners.xml" value="0.275" />
         <entry key="..\:/Users/Timotei/StudioProjects/MSA_Project/app/src/main/res/drawable/rounded_corner.xml" value="0.2713541666666667" />
+        <entry key="..\:/Users/Timotei/StudioProjects/MSA_Project/app/src/main/res/drawable/rounded_corner_profile.xml" value="0.20555555555555555" />
         <entry key="..\:/Users/Timotei/StudioProjects/MSA_Project/app/src/main/res/drawable/rounded_top.xml" value="0.14739583333333334" />
         <entry key="..\:/Users/Timotei/StudioProjects/MSA_Project/app/src/main/res/drawable/runner.xml" value="0.275" />
         <entry key="..\:/Users/Timotei/StudioProjects/MSA_Project/app/src/main/res/layout-v21/activity_home.xml" value="0.13541666666666666" />
@@ -31,7 +32,7 @@
         <entry key="..\:/Users/Timotei/StudioProjects/MSA_Project/app/src/main/res/layout/activity_register.xml" value="0.2552083333333333" />
         <entry key="..\:/Users/Timotei/StudioProjects/MSA_Project/app/src/main/res/layout/dropdown_item.xml" value="0.2" />
         <entry key="..\:/Users/Timotei/StudioProjects/MSA_Project/app/src/main/res/layout/fragment_home_fragment.xml" value="0.264" />
-        <entry key="..\:/Users/Timotei/StudioProjects/MSA_Project/app/src/main/res/layout/fragment_profile.xml" value="0.16077898550724637" />
+        <entry key="..\:/Users/Timotei/StudioProjects/MSA_Project/app/src/main/res/layout/fragment_profile.xml" value="0.2" />
         <entry key="..\:/Users/Timotei/StudioProjects/MSA_Project/app/src/main/res/menu/bottom_nav_menu.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Timotei/StudioProjects/MSA_Project/app/src/main/res/mipmap-anydpi-v26/ic_activity.xml" value="0.146875" />
       </map>
