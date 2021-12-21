@@ -178,7 +178,7 @@ class AddFoodActivity : AppCompatActivity()  {
 
 
                 val food = Food(
-                    name = name,
+                    name = name.lowercase(),
                     quantity = quantity.toInt(),
                     calories = calories.toInt(),
                     fats = fats.toInt(),

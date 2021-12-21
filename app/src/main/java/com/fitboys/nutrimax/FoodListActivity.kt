@@ -21,16 +21,24 @@ import com.google.firebase.firestore.FirebaseFirestoreException
 
 import com.google.firebase.firestore.QuerySnapshot
 
-import android.view.LayoutInflater
-import android.view.View
-
-import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.TextView
 
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import androidx.annotation.NonNull
 
 import com.google.android.gms.tasks.OnCompleteListener
+import android.view.inputmethod.EditorInfo
+
+import android.view.*
+
+import androidx.appcompat.widget.SearchView
+import androidx.core.app.ActivityCompat.startActivityForResult
+
+import android.content.Intent
+
+
+
 
 
 class FoodListActivity : AppCompatActivity() {
@@ -42,7 +50,6 @@ class FoodListActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_food_list)
-
         firebaseStore = FirebaseStorage.getInstance()
         storageReference = FirebaseStorage.getInstance().reference
 
@@ -66,6 +73,55 @@ class FoodListActivity : AppCompatActivity() {
         adapter = FoodAdapter(options)
         recyclerView?.adapter = adapter
     }
+
+
+
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.search_menu, menu)
+        val searchItem: MenuItem? = menu.findItem(R.id.actionSearch) as MenuItem?
+        val searchView: SearchView = searchItem?.actionView as SearchView
+        searchView.imeOptions = EditorInfo.IME_ACTION_DONE
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                if (newText != "") {
+                    val query = FirebaseFirestore.getInstance()
+                        .collection("foods").orderBy("name").startAt(newText?.uppercase())
+                        .endAt(newText?.lowercase() +"\uf8ff")
+                    val options: FirestoreRecyclerOptions<Food> = FirestoreRecyclerOptions.Builder<Food>()
+                        .setQuery(query, Food::class.java)
+                        .setLifecycleOwner(this@FoodListActivity)
+                        .build()
+
+                    adapter = FoodAdapter(options)
+                    recyclerView?.adapter = adapter
+                    return true
+                }
+                else
+                {
+                    val query = FirebaseFirestore.getInstance()
+                        .collection("foods")
+                    val options: FirestoreRecyclerOptions<Food> = FirestoreRecyclerOptions.Builder<Food>()
+                        .setQuery(query, Food::class.java)
+                        .setLifecycleOwner(this@FoodListActivity)
+                        .build()
+
+                    adapter = FoodAdapter(options)
+                    recyclerView?.adapter = adapter
+                    return true
+                }
+
+
+            }
+        })
+        return true
+    }
+
 
     override fun onStart() {
         super.onStart()
