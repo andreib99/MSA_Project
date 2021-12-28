@@ -7,10 +7,12 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.fitboys.nutrimax.AddFoodActivity
 import com.fitboys.nutrimax.FoodListActivity
+import com.fitboys.nutrimax.MealRecordActivity
 import com.fitboys.nutrimax.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
@@ -35,6 +37,7 @@ class HomeFragment:Fragment(R.layout.fragment_home_fragment) {
         val calories = view.findViewById<TextView>(R.id.calories);
         val recordFood = view.findViewById<Button>(R.id.recordFood)
         val addFood = view.findViewById<Button>(R.id.addFood)
+        val seeRecord = view.findViewById<ImageView>(R.id.fireImage)
 
         mAuth = FirebaseAuth.getInstance()
         mAuth?.currentUser?.uid?.let {
@@ -55,6 +58,9 @@ class HomeFragment:Fragment(R.layout.fragment_home_fragment) {
 
             addFood.setOnClickListener { view ->
                 startActivity(Intent(requireContext(), AddFoodActivity::class.java))
+            }
+            seeRecord.setOnClickListener{ view ->
+                startActivity(Intent(requireContext(), MealRecordActivity::class.java))
             }
         }
     }
