@@ -25,8 +25,8 @@ class FoodActivity : AppCompatActivity()  {
         mAuth = FirebaseAuth.getInstance()
         var foodName: TextView = findViewById(R.id.etName)
         if (b != null) {
-            Log.d(ContentValues.TAG, "Food name = ${b.getString("name")}")
-            foodName.text = b.getString("name")
+            Log.d(ContentValues.TAG, "Food name = ${b.getString("foodName")}")
+            foodName.text = b.getString("foodName")
         }
 
     }
