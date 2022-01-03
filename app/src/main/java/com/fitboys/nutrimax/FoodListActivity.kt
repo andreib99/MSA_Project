@@ -2,6 +2,7 @@ package com.fitboys.nutrimax
 
 import android.content.ContentValues
 import android.content.ContentValues.TAG
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.FirebaseStorage
@@ -15,45 +16,38 @@ import androidx.recyclerview.widget.RecyclerView
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.fitboys.nutrimax.data.model.Food
 
-import com.google.firebase.firestore.EventListener
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.FirebaseFirestoreException
 
 import com.google.firebase.firestore.QuerySnapshot
 
-import android.widget.EditText
 import android.widget.TextView
-
-import com.firebase.ui.firestore.FirestoreRecyclerAdapter
-import androidx.annotation.NonNull
-
 import com.google.android.gms.tasks.OnCompleteListener
 import android.view.inputmethod.EditorInfo
 
 import android.view.*
 
 import androidx.appcompat.widget.SearchView
-import androidx.core.app.ActivityCompat.startActivityForResult
 
 import android.content.Intent
+import android.widget.Toast
 
 
-
-
-
-class FoodListActivity : AppCompatActivity() {
+class FoodListActivity : AppCompatActivity(), FoodAdapter.OnItemClickListener{
     private var recyclerView: RecyclerView? = null
     var adapter : FoodAdapter? = null
     var firebaseStore : FirebaseStorage? = null
     var storageReference: StorageReference? = null
+    val listener = this
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_food_list)
+
         firebaseStore = FirebaseStorage.getInstance()
         storageReference = FirebaseStorage.getInstance().reference
 
         recyclerView = findViewById(R.id.recycler)
+        val textView: TextView = findViewById(R.id.textView)
         recyclerView?.layoutManager = LinearLayoutManager(this)
 
         val query = FirebaseFirestore.getInstance()
@@ -70,11 +64,17 @@ class FoodListActivity : AppCompatActivity() {
             .setLifecycleOwner(this)
             .build()
 
-        adapter = FoodAdapter(options)
+        adapter = FoodAdapter(options, listener)
         recyclerView?.adapter = adapter
     }
 
-
+    override fun onItemClick(position: Int, name: String) {
+        Toast.makeText(this, "Selected food: $name", Toast.LENGTH_SHORT).show()
+        adapter?.notifyItemChanged(position)
+        var i = Intent(this@FoodListActivity, FoodActivity::class.java)
+        i.putExtra("foodName", name)
+        startActivity(i)
+    }
 
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -98,7 +98,7 @@ class FoodListActivity : AppCompatActivity() {
                         .setLifecycleOwner(this@FoodListActivity)
                         .build()
 
-                    adapter = FoodAdapter(options)
+                    adapter = FoodAdapter(options, listener)
                     recyclerView?.adapter = adapter
                     return true
                 }
@@ -111,7 +111,7 @@ class FoodListActivity : AppCompatActivity() {
                         .setLifecycleOwner(this@FoodListActivity)
                         .build()
 
-                    adapter = FoodAdapter(options)
+                    adapter = FoodAdapter(options, listener)
                     recyclerView?.adapter = adapter
                     return true
                 }
