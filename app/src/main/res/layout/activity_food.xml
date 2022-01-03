@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/teal_700"
-    tools:context="ProfileFragment">
-
+    tools:context=".FoodActivity">
 
     <TextView
         android:id="@+id/etName"
@@ -21,4 +20,205 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="4dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/FoodImage"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="100dp"
+            android:padding="2dp" />
+
+        <TextView
+            android:id="@+id/quantity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="100dp"
+            android:layout_toEndOf="@+id/FoodImage"
+            android:text="Line 1"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/calories"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/quantity"
+            android:layout_marginStart="8dp"
+            android:layout_toEndOf="@+id/FoodImage"
+            android:text="Line 2"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/carbohydrates"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/calories"
+            android:layout_marginStart="8dp"
+            android:layout_toEndOf="@+id/FoodImage"
+            android:text="Line 3"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/proteins"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/carbohydrates"
+            android:layout_marginStart="8dp"
+            android:layout_toEndOf="@+id/FoodImage"
+            android:text="Line 4"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/fats"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/proteins"
+            android:layout_marginStart="8dp"
+            android:layout_toEndOf="@+id/FoodImage"
+            android:text="Line 5"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/rating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/calories"
+            android:layout_marginStart="8dp"
+            android:layout_toEndOf="@+id/FoodImage"
+            android:textSize="15sp"
+            android:visibility="invisible" />
+
+        <ImageView
+            android:id="@+id/Star1"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="75dp"
+            android:layout_marginTop="215dp"
+            android:padding="2dp"
+            android:src="@drawable/star_unfilled" />
+
+        <ImageView
+            android:id="@+id/Star2"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="215dp"
+            android:layout_toEndOf="@+id/Star1"
+            android:padding="2dp"
+            android:src="@drawable/star_unfilled" />
+
+        <ImageView
+            android:id="@+id/Star3"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="215dp"
+            android:layout_toEndOf="@+id/Star2"
+            android:padding="2dp"
+            android:src="@drawable/star_unfilled" />
+
+        <ImageView
+            android:id="@+id/Star4"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="215dp"
+            android:layout_toEndOf="@+id/Star3"
+            android:padding="2dp"
+            android:src="@drawable/star_unfilled" />
+
+
+        <ImageView
+            android:id="@+id/Star5"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="215dp"
+            android:layout_toEndOf="@+id/Star4"
+            android:padding="2dp"
+            android:src="@drawable/star_unfilled" />
+
+        <TextView
+            android:id="@+id/TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="270dp"
+            android:layout_toEndOf="@+id/FoodImage"
+            android:text="Comments"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="320dp"
+        android:layout_marginBottom="120dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:listitem="@layout/activity_single_comment" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/newComment"
+            android:layout_width="250dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="250dp"
+            android:background="@drawable/rounded_corner"
+            android:clickable="true"
+            android:cursorVisible="true"
+            android:ems="10"
+            android:focusable="true"
+            android:gravity="center|left"
+            android:hint="Write a new comment..."
+            android:inputType="text"
+            android:paddingStart="20dp"
+            android:paddingLeft="20dp"
+            android:textColor="#000000"
+            android:textColorHint="#575656"
+            android:textSize="20sp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnAddComment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="550dp"
+            android:background="@drawable/rounded_corner"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:text="Add"
+            android:textColor="#101010"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:backgroundTint="#5EDAA8" />
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
