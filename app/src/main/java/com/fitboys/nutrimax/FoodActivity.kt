@@ -383,6 +383,9 @@ class FoodActivity : AppCompatActivity()  {
                             Toast.LENGTH_SHORT
                         ).show()
                         newComment.text.clear()
+                        var i = Intent(this@FoodActivity, FoodActivity::class.java)
+                        i.putExtra("foodName", foodName.text)
+                        startActivity(i)
                     }
                     .addOnFailureListener { e ->
                         Log.w(TAG, "Error adding document", e)
