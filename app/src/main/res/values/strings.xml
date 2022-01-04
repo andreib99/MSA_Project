@@ -42,4 +42,10 @@
     <string name="username">Username</string>
     <string name="confirm_password">Confirm password</string>
     <string name="register">Register</string>
+    <string name="carbo">Carbo : </string>
+    <string name="fats">Fats : </string>
+    <string name="proteins">Proteins : </string>
+    <string name="detailed_report">Detailed report</string>
+    <string name="consumed_today">consumed today</string>
+    <string name="kcal">KCal</string>
 </resources>
