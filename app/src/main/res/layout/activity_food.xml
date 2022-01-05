@@ -73,6 +73,22 @@
             android:text="Line 3"
             android:textSize="15sp" />
 
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/addButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_corner"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_toEndOf="@+id/carbohydrates"
+            android:layout_below="@+id/calories"
+            android:layout_marginStart="50dp"
+            android:text="Add"
+            android:textColor="#101010"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:backgroundTint="#5EDAA8" />
+
         <TextView
             android:id="@+id/proteins"
             android:layout_width="wrap_content"
