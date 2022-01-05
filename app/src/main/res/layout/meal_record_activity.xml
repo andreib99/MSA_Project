@@ -66,7 +66,7 @@
                 style="@style/CircularDeterminateProgressBar"
                 android:layout_width="0dp"
                 android:layout_height="140dp"
-                android:progress="60"
+                android:progress="73"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHeight_percent="0.5"
@@ -171,21 +171,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25dp"
-                android:text="100"
+                android:text="100g"
                 android:textColor="@color/white"
                 android:textSize="20sp"
                 app:layout_constraintStart_toEndOf="@+id/textView13"
                 app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
-            <TextView
-                android:id="@+id/textView19"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="g"
-                android:textColor="@color/white"
-                android:textSize="20sp"
-                app:layout_constraintStart_toEndOf="@+id/proteins"
-                app:layout_constraintTop_toTopOf="@+id/textView13" />
 
             <TextView
                 android:id="@+id/textView13"
@@ -204,21 +195,12 @@
                 android:id="@+id/fats"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="100"
+                android:text="100g"
                 android:textColor="@color/white"
                 android:textSize="20sp"
                 app:layout_constraintStart_toEndOf="@+id/textView14"
                 app:layout_constraintTop_toBottomOf="@+id/proteins" />
 
-            <TextView
-                android:id="@+id/textView20"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="g"
-                android:textColor="@color/white"
-                android:textSize="20sp"
-                app:layout_constraintStart_toEndOf="@+id/fats"
-                app:layout_constraintTop_toBottomOf="@+id/textView19" />
 
             <TextView
                 android:id="@+id/textView14"
@@ -250,21 +232,12 @@
                 android:id="@+id/carbo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="100"
+                android:text="100g"
                 android:textColor="@color/white"
                 android:textSize="20sp"
                 app:layout_constraintStart_toEndOf="@+id/textView15"
                 app:layout_constraintTop_toBottomOf="@+id/fats" />
 
-            <TextView
-                android:id="@+id/textView21"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="g"
-                android:textColor="@color/white"
-                android:textSize="20sp"
-                app:layout_constraintStart_toEndOf="@+id/carbo"
-                app:layout_constraintTop_toBottomOf="@+id/textView20" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
