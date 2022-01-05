@@ -14,14 +14,14 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="512dp"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@id/imageView3"
+        app:layout_constraintBottom_toTopOf="@id/fireImage"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintGuide_percent="0.1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/fireImage"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:src="@drawable/fire"
@@ -39,11 +39,11 @@
         android:textColor="@color/black"
         android:textSize="42sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@id/imageView3"
+        app:layout_constraintBottom_toBottomOf="@id/fireImage"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/imageView3" />
+        app:layout_constraintTop_toTopOf="@id/fireImage" />
 
     <TextView
         android:id="@+id/KCal"
@@ -100,7 +100,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3"
+        app:layout_constraintTop_toBottomOf="@+id/fireImage"
         app:layout_constraintVertical_bias="1"
         app:srcCompat="@drawable/logo_large_fit"
         tools:ignore="ContentDescription" />
