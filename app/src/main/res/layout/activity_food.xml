@@ -4,196 +4,247 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/teal_700"
+    android:background="@color/white"
     tools:context=".FoodActivity">
 
-    <TextView
-        android:id="@+id/etName"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint1"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="Food name"
-        android:textColor="@color/black"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <RelativeLayout
-        android:id="@+id/relativeLayout"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_margin="4dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="4dp"
-        android:layout_marginBottom="4dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/FoodImage"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="100dp"
-            android:padding="2dp" />
+            android:layout_width="0dp"
+            android:layout_height="200dp"
+            android:src="@drawable/index2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/quantity"
+            android:id="@+id/etName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="100dp"
-            android:layout_toEndOf="@+id/FoodImage"
-            android:text="Line 1"
-            android:textSize="15sp" />
+            android:text="Food name"
+            android:textColor="@color/white"
+            android:textSize="46sp"
+            android:textStyle="bold|italic"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/FoodImage"
+            app:layout_constraintStart_toStartOf="@+id/FoodImage"
+            app:layout_constraintTop_toTopOf="@+id/FoodImage" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <TextView
-            android:id="@+id/calories"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/quantity"
-            android:layout_marginStart="8dp"
-            android:layout_toEndOf="@+id/FoodImage"
-            android:text="Line 2"
-            android:textSize="15sp" />
-
-        <TextView
-            android:id="@+id/carbohydrates"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/calories"
-            android:layout_marginStart="8dp"
-            android:layout_toEndOf="@+id/FoodImage"
-            android:text="Line 3"
-            android:textSize="15sp" />
-
-        <TextView
-            android:id="@+id/proteins"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/carbohydrates"
-            android:layout_marginStart="8dp"
-            android:layout_toEndOf="@+id/FoodImage"
-            android:text="Line 4"
-            android:textSize="15sp" />
-
-        <TextView
-            android:id="@+id/fats"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/proteins"
-            android:layout_marginStart="8dp"
-            android:layout_toEndOf="@+id/FoodImage"
-            android:text="Line 5"
-            android:textSize="15sp" />
-
-        <TextView
-            android:id="@+id/rating"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/calories"
-            android:layout_marginStart="8dp"
-            android:layout_toEndOf="@+id/FoodImage"
-            android:textSize="15sp"
-            android:visibility="invisible" />
-
-        <ImageView
-            android:id="@+id/Star1"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="75dp"
-            android:layout_marginTop="215dp"
-            android:padding="2dp"
-            android:src="@drawable/star_unfilled" />
-
-        <ImageView
-            android:id="@+id/Star2"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="215dp"
-            android:layout_toEndOf="@+id/Star1"
-            android:padding="2dp"
-            android:src="@drawable/star_unfilled" />
-
-        <ImageView
-            android:id="@+id/Star3"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="215dp"
-            android:layout_toEndOf="@+id/Star2"
-            android:padding="2dp"
-            android:src="@drawable/star_unfilled" />
-
-        <ImageView
-            android:id="@+id/Star4"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="215dp"
-            android:layout_toEndOf="@+id/Star3"
-            android:padding="2dp"
-            android:src="@drawable/star_unfilled" />
-
-
-        <ImageView
-            android:id="@+id/Star5"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="215dp"
-            android:layout_toEndOf="@+id/Star4"
-            android:padding="2dp"
-            android:src="@drawable/star_unfilled" />
-
-        <TextView
-            android:id="@+id/TextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="270dp"
-            android:layout_toEndOf="@+id/FoodImage"
-            android:text="Comments"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-    </RelativeLayout>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler"
-        android:layout_width="0dp"
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="320dp"
-        android:layout_marginBottom="120dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:listitem="@layout/activity_single_comment" />
+        app:layout_constraintTop_toBottomOf="@id/constraint1">
 
-    <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/relativeLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/textView16"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Details"
+                android:textColor="@color/black"
+                android:textSize="38sp"
+                android:textStyle="bold|italic"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.25"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/quantity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginBottom="12dp"
+                android:text="Quantity: 200g"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/Star3"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textView16"
+                app:layout_constraintTop_toBottomOf="@+id/fats" />
+
+            <TextView
+                android:id="@+id/calories"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/quantity"
+                android:layout_toEndOf="@+id/textView16"
+                android:drawableStart="@drawable/trending"
+                android:text="100 Kcal"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/textView16"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textView16"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/carbohydrates"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/calories"
+                android:text="Carbo: 14g"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textView16"
+                app:layout_constraintTop_toBottomOf="@+id/proteins" />
+
+            <TextView
+                android:id="@+id/proteins"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/carbohydrates"
+                android:text="Proteins: 20g"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textView16"
+                app:layout_constraintTop_toBottomOf="@+id/calories" />
+
+            <TextView
+                android:id="@+id/fats"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/proteins"
+                android:text="Fats: 39g"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textView16"
+                app:layout_constraintTop_toBottomOf="@+id/carbohydrates" />
+
+            <TextView
+                android:id="@+id/rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/calories"
+                android:textSize="15sp"
+                android:visibility="invisible"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/Star1"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="12dp"
+                android:padding="2dp"
+                android:src="@drawable/star_unfilled"
+                app:layout_constraintEnd_toStartOf="@id/Star2"
+                app:layout_constraintTop_toBottomOf="@+id/quantity" />
+
+            <ImageView
+                android:id="@+id/Star2"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="12dp"
+                android:layout_toEndOf="@+id/Star1"
+                android:padding="2dp"
+                android:src="@drawable/star_unfilled"
+                app:layout_constraintEnd_toStartOf="@+id/Star3"
+                app:layout_constraintTop_toBottomOf="@+id/quantity" />
+
+            <ImageView
+                android:id="@+id/Star3"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="12dp"
+                android:layout_toEndOf="@+id/Star2"
+                android:padding="2dp"
+                android:src="@drawable/star_unfilled"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/quantity" />
+
+            <ImageView
+                android:id="@+id/Star4"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="12dp"
+                android:layout_toEndOf="@+id/Star3"
+                android:padding="2dp"
+                android:src="@drawable/star_unfilled"
+                app:layout_constraintStart_toEndOf="@+id/Star3"
+                app:layout_constraintTop_toBottomOf="@+id/quantity" />
+
+
+            <ImageView
+                android:id="@+id/Star5"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="12dp"
+                android:layout_toEndOf="@+id/Star4"
+                android:padding="2dp"
+                android:src="@drawable/star_unfilled"
+                app:layout_constraintStart_toEndOf="@+id/Star4"
+                app:layout_constraintTop_toBottomOf="@+id/quantity" />
+
+            <TextView
+                android:id="@+id/comments"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Comments"
+                android:textColor="@color/black"
+                android:textSize="38sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/Star3" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/comments"
+                tools:listitem="@layout/activity_single_comment" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/linearLayout"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintStart_toStartOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/newComment"
-            android:layout_width="250dp"
+            android:layout_width="0dp"
             android:layout_height="60dp"
             android:layout_gravity="center"
-            android:layout_marginTop="250dp"
-            android:background="@drawable/rounded_corner"
+            android:background="@drawable/rounded_top"
             android:clickable="true"
             android:cursorVisible="true"
             android:ems="10"
@@ -205,20 +256,24 @@
             android:paddingLeft="20dp"
             android:textColor="#000000"
             android:textColorHint="#575656"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
-        <com.google.android.material.button.MaterialButton
+        <Button
             android:id="@+id/btnAddComment"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="550dp"
-            android:background="@drawable/rounded_corner"
+            android:background="@drawable/ic_baseline_send_24"
             android:gravity="center"
             android:orientation="horizontal"
-            android:text="Add"
-            android:textColor="#101010"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:backgroundTint="#5EDAA8" />
-    </LinearLayout>
+            app:backgroundTint="@color/black"
+            app:layout_constraintBottom_toBottomOf="@id/newComment"
+            app:layout_constraintEnd_toEndOf="@id/newComment"
+            app:layout_constraintHorizontal_bias="0.95"
+            app:layout_constraintStart_toStartOf="@+id/newComment"
+            app:layout_constraintTop_toTopOf="@+id/newComment"
+            app:layout_constraintWidth_percent="0.13" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
