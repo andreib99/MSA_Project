@@ -1,23 +1,19 @@
 package com.fitboys.nutrimax
 
 import android.annotation.SuppressLint
-import android.content.ContentValues
 import android.content.ContentValues.TAG
 import android.content.Intent
 import android.graphics.BitmapFactory
-import android.os.Build
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
 import android.view.View
 import android.widget.*
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.fitboys.nutrimax.data.model.Comment
-import com.fitboys.nutrimax.data.model.Food
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -26,12 +22,10 @@ import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
-import org.w3c.dom.Text
 import java.io.File
 import java.io.IOException
 import java.lang.Exception
 import java.text.SimpleDateFormat
-import java.time.format.DateTimeFormatter
 import java.util.*
 import kotlin.collections.HashMap
 
@@ -60,6 +54,11 @@ class FoodActivity : AppCompatActivity()  {
         var star5 : ImageView = findViewById(R.id.Star5)
         val newComment = findViewById<EditText>(R.id.newComment)
         val btnAddComment = findViewById<Button>(R.id.btnAddComment)
+        val btnBack=findViewById<Button>(R.id.FoodBackBtn)
+
+        btnBack.setOnClickListener{view ->
+            startActivity(Intent(this@FoodActivity,FoodListActivity::class.java))
+        }
 
         if (b != null) {
             Log.d(TAG, "Food name = ${b.getString("foodName")}")

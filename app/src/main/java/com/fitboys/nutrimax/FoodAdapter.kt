@@ -35,8 +35,6 @@ class FoodAdapter(options: FirestoreRecyclerOptions<Food>, private val listener:
 
     override fun onBindViewHolder(holder: foodsViewholder, position: Int, model: Food) {
             holder.name.text = model.name
-            holder.quantity.text = model.quantity.toString()
-            holder.calories.text = model.calories.toString()
             holder.rating.text = model.rating.toString()
             holder.image_path.text = model.image
             val mStoreReference = FirebaseStorage.getInstance().reference
@@ -56,8 +54,6 @@ class FoodAdapter(options: FirestoreRecyclerOptions<Food>, private val listener:
 
     inner class foodsViewholder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener{
         var name: TextView = itemView.findViewById(R.id.name)
-        var quantity: TextView = itemView.findViewById(R.id.quantity)
-        var calories: TextView = itemView.findViewById(R.id.calories)
         var rating: TextView = itemView.findViewById(R.id.rating)
         var image: ImageView = itemView.findViewById(R.id.FoodImage)
         var image_path: TextView = itemView.findViewById(R.id.image)

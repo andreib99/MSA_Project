@@ -3,7 +3,6 @@ package com.fitboys.nutrimax
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -17,7 +16,7 @@ class MealRecordActivity : AppCompatActivity() {
         setContentView(R.layout.meal_record_activity)
 
         val tvDate=findViewById<TextView>(R.id.tvDate)
-        val btnBack=findViewById<Button>(R.id.mealRecordBackBtn)
+        val btnBack=findViewById<Button>(R.id.MealRecordBackBtn)
 
         setDate(tvDate)
         btnBack.setOnClickListener{view ->
