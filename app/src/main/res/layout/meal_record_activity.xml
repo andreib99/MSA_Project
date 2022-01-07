@@ -11,7 +11,7 @@
         android:layout_height="wrap_content">
 
         <Button
-            android:id="@+id/mealRecordBackBtn"
+            android:id="@+id/MealRecordBackBtn"
             android:layout_width="39dp"
             android:layout_height="33dp"
             android:background="@drawable/ic_baseline_arrow_back_24"

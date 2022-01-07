@@ -32,123 +32,175 @@
             android:gravity="center"
             android:text="Please fill in the following information" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="15dp"
-            android:layout_marginBottom="15dp">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/rounded_corner"
-                android:hint="Name"
-                android:inputType="text"
-                android:textColorHint="#575656" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        <EditText
+            android:id="@+id/etName"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
             android:layout_marginStart="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="12dp"
             android:layout_marginEnd="15dp"
-            android:layout_marginBottom="15dp">
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/rounded_corner"
+            android:clickable="true"
+            android:cursorVisible="true"
+            android:ems="10"
+            android:focusable="true"
+            android:gravity="center|left"
+            android:hint="Name"
+            android:inputType="text"
+            android:paddingStart="20dp"
+            android:paddingLeft="20dp"
+            android:textColor="#000000"
+            android:textColorHint="#575656"
+            android:textSize="20sp" />
+
+
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etQuantity"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/rounded_corner"
+                android:layout_height="60dp"
                 android:hint="Quantity"
-                android:inputType="number"
-                android:textColorHint="#575656" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginEnd="15dp"
-            android:layout_marginBottom="15dp">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etCalories"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="15dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="12dp"
                 android:background="@drawable/rounded_corner"
-                android:hint="Calories"
+                android:clickable="true"
+                android:cursorVisible="true"
+                android:ems="10"
+                android:focusable="true"
+                android:gravity="center|left"
                 android:inputType="number"
-                android:textColorHint="#575656" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:paddingStart="20dp"
+                android:paddingLeft="20dp"
+                android:textColor="#000000"
+                android:textColorHint="#575656"
+                android:textSize="20sp"/>
 
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etCalories"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
             android:layout_marginStart="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="12dp"
             android:layout_marginEnd="15dp"
-            android:layout_marginBottom="15dp">
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/rounded_corner"
+            android:clickable="true"
+            android:cursorVisible="true"
+            android:ems="10"
+            android:focusable="true"
+            android:gravity="center|left"
+            android:hint="Calories"
+            android:inputType="number"
+            android:paddingStart="20dp"
+            android:paddingLeft="20dp"
+            android:textColor="#000000"
+            android:textColorHint="#575656"
+            android:textSize="20sp" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etFats"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/rounded_corner"
-                android:hint="Fats"
-                android:inputType="number"
-                android:textColorHint="#575656" />
-        </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etFats"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
             android:layout_marginStart="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="12dp"
             android:layout_marginEnd="15dp"
-            android:layout_marginBottom="15dp">
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/rounded_corner"
+            android:clickable="true"
+            android:cursorVisible="true"
+            android:ems="10"
+            android:focusable="true"
+            android:gravity="center|left"
+            android:hint="Fats"
+            android:inputType="number"
+            android:paddingStart="20dp"
+            android:paddingLeft="20dp"
+            android:textColor="#000000"
+            android:textColorHint="#575656"
+            android:textSize="20sp" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etProteins"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/rounded_corner"
-                android:hint="Proteins"
-                android:inputType="number"
-                android:textColorHint="#575656" />
-        </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etProteins"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
             android:layout_marginStart="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="12dp"
             android:layout_marginEnd="15dp"
-            android:layout_marginBottom="15dp">
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="12dp"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_corner"
+            android:clickable="true"
+            android:cursorVisible="true"
+            android:ems="10"
+            android:focusable="true"
+            android:gravity="center|left"
+            android:hint="Proteins"
+            android:inputType="number"
+            android:paddingStart="20dp"
+            android:paddingLeft="20dp"
+            android:textColor="#000000"
+            android:textColorHint="#575656"
+            android:textSize="20sp" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etCarbs"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/rounded_corner"
-                android:hint="Carbs"
-                android:inputType="number"
-                android:textColorHint="#575656" />
-        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etCarbs"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="12dp"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_corner"
+            android:clickable="true"
+            android:cursorVisible="true"
+            android:ems="10"
+            android:focusable="true"
+            android:gravity="center|left"
+            android:hint="Carbs"
+            android:inputType="number"
+            android:paddingStart="20dp"
+            android:paddingLeft="20dp"
+            android:textColor="#000000"
+            android:textColorHint="#575656"
+            android:textSize="20sp" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnImage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:text="Choose image" />
+            android:background="@drawable/rounded_corner"
+            android:text="Choose image"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -161,7 +213,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="Add" />
+                android:background="@drawable/rounded_corner"
+                android:text="Add"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <LinearLayout
                 android:layout_width="match_parent"
