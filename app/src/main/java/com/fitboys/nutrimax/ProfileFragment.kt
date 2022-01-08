@@ -73,8 +73,8 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                 val cancelButton = popupInputDialogView.findViewById<Button>(R.id.button_cancel);
 
                 val alertDialogBuilder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
-                alertDialogBuilder.setTitle("Update calories intake.")
-                alertDialogBuilder.setIcon(R.drawable.ic_launcher_background)
+                alertDialogBuilder.setTitle("Update calories intake")
+                alertDialogBuilder.setIcon(R.drawable.ic_baseline_update_24)
                 alertDialogBuilder.setCancelable(false)
 
 
@@ -123,8 +123,8 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                 val cancelButton = popupInputDialogView.findViewById<Button>(R.id.button_cancel);
 
                 val alertDialogBuilder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
-                alertDialogBuilder.setTitle("Update weight.")
-                alertDialogBuilder.setIcon(R.drawable.ic_launcher_background)
+                alertDialogBuilder.setTitle("Update weight")
+                alertDialogBuilder.setIcon(R.drawable.ic_baseline_update_24)
                 alertDialogBuilder.setCancelable(false)
 
 
@@ -165,8 +165,8 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                 val cancelButton = popupInputDialogView.findViewById<Button>(R.id.button_cancel);
 
                 val alertDialogBuilder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
-                alertDialogBuilder.setTitle("Update height.")
-                alertDialogBuilder.setIcon(R.drawable.ic_launcher_background)
+                alertDialogBuilder.setTitle("Update height")
+                alertDialogBuilder.setIcon(R.drawable.ic_baseline_update_24)
                 alertDialogBuilder.setCancelable(false)
 
 

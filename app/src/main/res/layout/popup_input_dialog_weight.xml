@@ -1,43 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingTop="20dp">
+        android:background="@color/grey"
+        android:paddingTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_horizontal"
+            android:layout_marginBottom="8dp"
             android:orientation="horizontal">
 
-            <TextView
-                android:gravity="end"
-                android:text="Weight : " />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
 
-            <EditText
-                android:id="@+id/weight"
-                android:hint="Enter weight"
-                android:inputType="text" />
-
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_horizontal"
-            android:orientation="horizontal">
-
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_horizontal"
-            android:orientation="horizontal">
+                <EditText
+                    android:id="@+id/weight"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/rounded_corner"
+                    android:hint="New weight"
+                    android:inputType="number"
+                    android:paddingStart="20dp"
+                    android:paddingLeft="20dp"
+                    android:textColor="@color/black"
+                    android:textColorHint="#575656"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintWidth_percent="0.45" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </TableRow>
 

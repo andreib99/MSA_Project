@@ -4,7 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FoodListActivity">
+    tools:context=".FoodListActivity"
+    android:background="@color/white">
+
+    <Button
+        android:id="@+id/FoodListBtnBack"
+        android:layout_width="39dp"
+        android:layout_height="33dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/ic_baseline_arrow_back_24"
+        app:backgroundTint="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.03" />
 
     <TextView
         android:id="@+id/textView"
@@ -17,13 +32,30 @@
         app:layout_constraintTop_toTopOf="@+id/recycler"
         android:visibility="invisible"/>
 
+    <SearchView
+        android:id="@+id/search_bar"
+        style="@style/MySearchBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="4dp"
+        android:background="@drawable/rounded_search"
+        android:iconifiedByDefault="false"
+        android:queryHint="Enter food name..."
+        android:theme="@style/MySearchBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/FoodListBtnBack" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/search_bar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -63,6 +63,11 @@ class FoodActivity : AppCompatActivity()  {
         var addFood : Button = findViewById(R.id.addButton)
         val newComment = findViewById<EditText>(R.id.newComment)
         val btnAddComment = findViewById<Button>(R.id.btnAddComment)
+        val btnBack=findViewById<Button>(R.id.FoodBackBtn)
+
+        btnBack.setOnClickListener{view ->
+            startActivity(Intent(this@FoodActivity,FoodListActivity::class.java))
+        }
 
         if (b != null) {
             Log.d(TAG, "Food name = ${b.getString("foodName")}")

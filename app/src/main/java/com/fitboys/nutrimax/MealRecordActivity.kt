@@ -2,13 +2,11 @@ package com.fitboys.nutrimax
 
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
-import android.app.TimePickerDialog
 import android.content.ContentValues
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -16,13 +14,9 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import java.lang.Exception
-import android.text.format.DateFormat
 import android.widget.*
 import androidx.annotation.RequiresApi
 import java.text.SimpleDateFormat
-import java.time.DayOfWeek
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
 import java.util.*
 
 class MealRecordActivity : AppCompatActivity() {

@@ -38,6 +38,7 @@ class HomeFragment:Fragment(R.layout.fragment_home_fragment) {
         val recordFood = view.findViewById<Button>(R.id.recordFood)
         val addFood = view.findViewById<Button>(R.id.addFood)
         val seeRecord = view.findViewById<ImageView>(R.id.fireImage)
+        seeRecord.animate().rotationBy(360F).duration = 1200
 
         mAuth = FirebaseAuth.getInstance()
         mAuth?.currentUser?.uid?.let {
