@@ -1,19 +1,25 @@
 package com.fitboys.nutrimax
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
+import android.content.ContentValues
 import android.content.ContentValues.TAG
 import android.content.Intent
 import android.graphics.BitmapFactory
+import android.os.Build
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
 import android.widget.*
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.fitboys.nutrimax.data.model.Comment
+import com.fitboys.nutrimax.data.model.Food
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -22,17 +28,19 @@ import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
+import org.w3c.dom.Text
 import java.io.File
 import java.io.IOException
 import java.lang.Exception
 import java.text.SimpleDateFormat
+import java.time.format.DateTimeFormatter
 import java.util.*
 import kotlin.collections.HashMap
 
 class FoodActivity : AppCompatActivity()  {
     private var mAuth: FirebaseAuth? = null
 
-    @SuppressLint("SetTextI18n")
+    @SuppressLint("SetTextI18n", "SimpleDateFormat")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_food)
@@ -52,6 +60,7 @@ class FoodActivity : AppCompatActivity()  {
         var star3 : ImageView = findViewById(R.id.Star3)
         var star4 : ImageView = findViewById(R.id.Star4)
         var star5 : ImageView = findViewById(R.id.Star5)
+        var addFood : Button = findViewById(R.id.btnAddThisFood)
         val newComment = findViewById<EditText>(R.id.newComment)
         val btnAddComment = findViewById<Button>(R.id.btnAddComment)
         val btnBack=findViewById<Button>(R.id.FoodBackBtn)
@@ -69,16 +78,16 @@ class FoodActivity : AppCompatActivity()  {
         recyclerView?.layoutManager = LinearLayoutManager(this)
 
 
-        var calories: String
-        var carbohydrates: String
-        var fats: String
-        var proteins: String
-        var quantity: String
-        var rating: String
-        var image: String
+        var calories = ""
+        var carbohydrates = ""
+        var fats = ""
+        var proteins = ""
+        var quantity = ""
+        var rating = ""
+        var image = ""
         var foodId = ""
         var ratings : HashMap<String, Int> = HashMap()
-
+        var history : HashMap<String, MutableList<HashMap<String, String>>> = HashMap()
         val db = Firebase.firestore
 
         btnAddComment.setOnClickListener(View.OnClickListener { view: View? ->
@@ -115,6 +124,7 @@ class FoodActivity : AppCompatActivity()  {
 
                     Log.d(TAG, "ratings = ${ratings}.")
 
+                    Log.d(TAG, "data = ${document.data}.")
                     //Reading Image from db
 
                     val mStoreReference = FirebaseStorage.getInstance().reference
@@ -157,6 +167,119 @@ class FoodActivity : AppCompatActivity()  {
             .addOnFailureListener { exception ->
                 Log.w(TAG, "Error getting documents: ", exception)
             }
+
+        mAuth!!.currentUser?.uid?.let {
+            db.collection("users")
+                .document(it)
+                .get()
+                .addOnSuccessListener { document ->
+                        try {
+                            history = document.data?.get("history") as HashMap<String, MutableList<HashMap<String, String>>>
+                            Log.d(TAG, "history = ${history}.")
+                        } catch (e: Exception) {
+                            e.printStackTrace()
+                        }
+                    }
+        }
+
+        addFood.setOnClickListener {
+
+            val layoutInflater = LayoutInflater.from(this@FoodActivity)
+            val popupInputDialogView: View =
+                layoutInflater.inflate(R.layout.popup_input_dialog_food, null)
+
+            val alertDialogBuilder: AlertDialog.Builder = AlertDialog.Builder(this@FoodActivity)
+            alertDialogBuilder.setTitle("Add food")
+            alertDialogBuilder.setIcon(R.drawable.ic_launcher_background)
+            alertDialogBuilder.setCancelable(false)
+
+            val saveButton = popupInputDialogView.findViewById<Button>(R.id.button_save);
+            val cancelButton = popupInputDialogView.findViewById<Button>(R.id.button_cancel);
+
+            alertDialogBuilder.setView(popupInputDialogView)
+
+            val alertDialog: AlertDialog = alertDialogBuilder.create()
+            alertDialog.show()
+
+            saveButton.setOnClickListener(View.OnClickListener {
+                val foodQuantity = popupInputDialogView.findViewById<EditText>(R.id.quantity);
+                val quantityNumber = foodQuantity.text.toString()
+                val currentDateTime = SimpleDateFormat("yyyy.MM.dd")
+                mAuth!!.currentUser?.uid?.let { it1 ->
+                    db.collection("users")
+                        .document(it1).get().addOnSuccessListener{ document ->
+                                val remainingCalories = document.data?.get("remainingCalories")
+                                if(history[currentDateTime.format(Date())].isNullOrEmpty()) {
+                                    Log.d(ContentValues.TAG, "Emptyyyy")
+
+                                    history[currentDateTime.format(Date())] = mutableListOf(
+                                        hashMapOf(
+                                            "id" to foodId,
+                                            "quantity" to quantityNumber,
+                                            "calories" to (quantityNumber.toInt() * calories.toInt() / quantity.toInt()).toString(),
+                                            "proteins" to (quantityNumber.toInt() * proteins.toInt() / quantity.toInt()).toString(),
+                                            "carbohydrates" to (quantityNumber.toInt() * carbohydrates.toInt() / quantity.toInt()).toString(),
+                                            "fats" to (quantityNumber.toInt() * fats.toInt() / quantity.toInt()).toString()
+                                        )
+                                    )
+                                    Log.d(ContentValues.TAG, "new history : $history")
+                                    db.collection("users")
+                                        .document(it1).update(
+                                            "history", history,
+                                            "remainingCalories", remainingCalories.toString().toInt() - quantityNumber.toInt() * calories.toInt() / quantity.toInt()
+                                        )
+                                        .addOnSuccessListener {
+                                            Log.d(ContentValues.TAG, "DocumentSnapshot added")
+                                            var i = Intent(
+                                                this@FoodActivity,
+                                                MealRecordActivity::class.java
+                                            )
+                                            i.putExtra("date", currentDateTime.format(Date()))
+                                            startActivity(i)
+                                        }
+                                        .addOnFailureListener { e ->
+                                            Log.w(ContentValues.TAG, "Error updating document", e)
+                                        }
+                                }
+                                else
+                                {
+                                    Log.d(ContentValues.TAG, "Is not emptyyy")
+
+                                    history[currentDateTime.format(Date())]?.add(
+                                        hashMapOf(
+                                            "id" to foodId,
+                                            "quantity" to quantityNumber,
+                                            "calories" to (quantityNumber.toInt() * calories.toInt() / quantity.toInt()).toString(),
+                                            "proteins" to (quantityNumber.toInt() * proteins.toInt() / quantity.toInt()).toString(),
+                                            "carbohydrates" to (quantityNumber.toInt() * carbohydrates.toInt() / quantity.toInt()).toString(),
+                                            "fats" to (quantityNumber.toInt() * fats.toInt() / quantity.toInt()).toString()
+                                        )
+                                    )
+                                    Log.d(ContentValues.TAG, "new history : $history")
+                                    db.collection("users")
+                                        .document(it1).update(
+                                            "history", history,
+                                            "remainingCalories", remainingCalories.toString().toInt() - quantityNumber.toInt() * calories.toInt() / quantity.toInt()
+                                        )
+                                        .addOnSuccessListener {
+                                            Log.d(ContentValues.TAG, "DocumentSnapshot added")
+                                            var i = Intent(
+                                                this@FoodActivity,
+                                                MealRecordActivity::class.java
+                                            )
+                                            i.putExtra("date", currentDateTime.format(Date()))
+                                            startActivity(i)
+                                        }
+                                        .addOnFailureListener { e ->
+                                            Log.w(ContentValues.TAG, "Error updating document", e)
+                                        }
+                                }
+                        }
+                }
+                })
+
+            cancelButton.setOnClickListener(View.OnClickListener { alertDialog.cancel() })
+        }
 
         star1.setOnClickListener {
             // your code to perform when the user clicks on the ImageView
