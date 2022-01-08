@@ -16,4 +16,10 @@
         <item name="android:indeterminateOnly">false</item>
         <item name="android:progressDrawable">@drawable/progress</item>
     </style>
+    <style name="MySearchBar">
+        <item name="android:editTextColor">@android:color/black</item>
+        <item name="android:textColorHint">@android:color/darker_gray</item>
+        <item name="iconTint">@android:color/darker_gray</item>
+        <item name="drawableTint">@android:color/darker_gray</item>
+    </style>
 </resources>
