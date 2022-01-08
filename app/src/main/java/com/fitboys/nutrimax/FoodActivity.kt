@@ -73,13 +73,13 @@ class FoodActivity : AppCompatActivity()  {
         recyclerView?.layoutManager = LinearLayoutManager(this)
 
 
-        var calories: String = ""
-        var carbohydrates: String = ""
-        var fats: String = ""
-        var proteins: String = ""
-        var quantity: String = ""
-        var rating: String = ""
-        var image: String = ""
+        var calories = ""
+        var carbohydrates = ""
+        var fats = ""
+        var proteins = ""
+        var quantity = ""
+        var rating = ""
+        var image = ""
         var foodId = ""
         var ratings : HashMap<String, Int> = HashMap()
         var history : HashMap<String, MutableList<HashMap<String, String>>> = HashMap()
@@ -205,7 +205,7 @@ class FoodActivity : AppCompatActivity()  {
                         .document(it1).get().addOnCompleteListener() { task ->
                             if (task.isSuccessful)
                             {
-                                if(history.isEmpty()) {
+                                if(history[currentDateTime.format(Date())].isNullOrEmpty()) {
                                     Log.d(ContentValues.TAG, "Emptyyyy")
 
                                     history[currentDateTime.format(Date())] = mutableListOf(
@@ -225,7 +225,7 @@ class FoodActivity : AppCompatActivity()  {
                                             Log.d(ContentValues.TAG, "DocumentSnapshot added")
                                             var i = Intent(
                                                 this@FoodActivity,
-                                                HistoryActivity::class.java
+                                                MealRecordActivity::class.java
                                             )
                                             i.putExtra("date", currentDateTime.format(Date()))
                                             startActivity(i)
@@ -255,7 +255,7 @@ class FoodActivity : AppCompatActivity()  {
                                             Log.d(ContentValues.TAG, "DocumentSnapshot added")
                                             var i = Intent(
                                                 this@FoodActivity,
-                                                HistoryActivity::class.java
+                                                MealRecordActivity::class.java
                                             )
                                             i.putExtra("date", currentDateTime.format(Date()))
                                             startActivity(i)
