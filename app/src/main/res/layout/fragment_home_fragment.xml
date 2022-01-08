@@ -24,6 +24,7 @@
         android:id="@+id/fireImage"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
+        android:rotationY="0"
         android:src="@drawable/fire"
         app:layout_constraintBottom_toTopOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="parent"

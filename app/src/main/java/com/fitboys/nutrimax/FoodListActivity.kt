@@ -29,6 +29,7 @@ import android.view.*
 import androidx.appcompat.widget.SearchView
 
 import android.content.Intent
+import android.widget.Button
 import android.widget.Toast
 
 
@@ -45,6 +46,12 @@ class FoodListActivity : AppCompatActivity(), FoodAdapter.OnItemClickListener{
 
         firebaseStore = FirebaseStorage.getInstance()
         storageReference = FirebaseStorage.getInstance().reference
+
+        val btnBack=findViewById<Button>(R.id.FoodListBtnBack)
+
+        btnBack.setOnClickListener{view ->
+            startActivity(Intent(this@FoodListActivity,HomeActivity::class.java))
+        }
 
         recyclerView = findViewById(R.id.recycler)
         val textView: TextView = findViewById(R.id.textView)
