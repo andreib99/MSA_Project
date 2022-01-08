@@ -19,7 +19,7 @@ import androidx.annotation.RequiresApi
 import java.text.SimpleDateFormat
 import java.util.*
 
-class MealRecordActivity : AppCompatActivity() {
+class MealRecordActivity : AppCompatActivity(), MealRecordAdapter.OnItemClickListener{
 
     private var mAuth: FirebaseAuth? = null
     private lateinit var date : String
@@ -31,6 +31,8 @@ class MealRecordActivity : AppCompatActivity() {
     var month: Int = 0
     var year: Int = 0
     var cal = Calendar.getInstance()
+    val listener = this
+
 
     @RequiresApi(Build.VERSION_CODES.O)
     @SuppressLint("SetTextI18n")
@@ -40,13 +42,13 @@ class MealRecordActivity : AppCompatActivity() {
 
         mAuth = FirebaseAuth.getInstance()
 
-        tvDate=findViewById<TextView>(R.id.tvDate)
+        tvDate=findViewById(R.id.tvDate)
         val remainingCalories=findViewById<TextView>(R.id.textView7)
         val proteins=findViewById<TextView>(R.id.proteins)
         val fats=findViewById<TextView>(R.id.fats)
         val carbohydrates=findViewById<TextView>(R.id.carbo)
         val progressText=findViewById<TextView>(R.id.text_view_progress)
-        val btnBack=findViewById<Button>(R.id.mealRecordBackBtn)
+        val btnBack=findViewById<Button>(R.id.MealRecordBackBtn)
         val progressBar=findViewById<ProgressBar>(R.id.progressBar)
 
         var history: HashMap<String, MutableList<HashMap<String, String>>>
@@ -54,7 +56,6 @@ class MealRecordActivity : AppCompatActivity() {
         var totalCarbohydrates = 0
         var totalProteins = 0
         var totalFats = 0
-
 
         setDate(tvDate)
 
@@ -108,7 +109,6 @@ class MealRecordActivity : AppCompatActivity() {
                         }
 
                         val caloriesIntake = document.data?.get("caloriesIntake").toString().toInt()
-                        val remainingCal = caloriesIntake - totalCalories
 
                         remainingCalories.text = totalCalories.toString()
                         Log.d(ContentValues.TAG, "totalCalories: $totalCalories")
@@ -123,30 +123,24 @@ class MealRecordActivity : AppCompatActivity() {
                         percentage = totalCalories * 100 / caloriesIntake
                         progressText.text = "$percentage%"
                         progressBar.progress = percentage
-                        updateUserData(remainingCal.toString())
 
                         recyclerView = findViewById(R.id.recycler)
                         recyclerView?.layoutManager = LinearLayoutManager(this)
-                        adapter = history[date]?.let { it1 -> MealRecordAdapter(it1) }
+                        adapter = history[date]?.let { it1 -> MealRecordAdapter(it1, listener) }
                         recyclerView?.adapter = adapter
                     } catch (e: Exception) {
                         e.printStackTrace()
                     }
                 }
         }
-
     }
 
-    private fun updateUserData(calories: String) {
-        val db = Firebase.firestore
-        mAuth!!.currentUser?.uid?.let {
-            db.collection("users")
-                .document(it).update(
-                    mapOf(
-                        "remainingCalories" to calories
-                    )
-                )
-        }
+    override fun onItemClick(position: Int, name: String) {
+        Toast.makeText(this, "Selected food: $name", Toast.LENGTH_SHORT).show()
+        adapter?.notifyItemChanged(position)
+        var i = Intent(this@MealRecordActivity, FoodActivity::class.java)
+        i.putExtra("foodName", name)
+        startActivity(i)
     }
 
     @RequiresApi(Build.VERSION_CODES.O)

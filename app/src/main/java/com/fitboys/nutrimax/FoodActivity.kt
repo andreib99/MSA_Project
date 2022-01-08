@@ -60,7 +60,7 @@ class FoodActivity : AppCompatActivity()  {
         var star3 : ImageView = findViewById(R.id.Star3)
         var star4 : ImageView = findViewById(R.id.Star4)
         var star5 : ImageView = findViewById(R.id.Star5)
-        var addFood : Button = findViewById(R.id.addButton)
+        var addFood : Button = findViewById(R.id.btnAddThisFood)
         val newComment = findViewById<EditText>(R.id.newComment)
         val btnAddComment = findViewById<Button>(R.id.btnAddComment)
         val btnBack=findViewById<Button>(R.id.FoodBackBtn)
@@ -207,9 +207,8 @@ class FoodActivity : AppCompatActivity()  {
                 val currentDateTime = SimpleDateFormat("yyyy.MM.dd")
                 mAuth!!.currentUser?.uid?.let { it1 ->
                     db.collection("users")
-                        .document(it1).get().addOnCompleteListener() { task ->
-                            if (task.isSuccessful)
-                            {
+                        .document(it1).get().addOnSuccessListener{ document ->
+                                val remainingCalories = document.data?.get("remainingCalories")
                                 if(history[currentDateTime.format(Date())].isNullOrEmpty()) {
                                     Log.d(ContentValues.TAG, "Emptyyyy")
 
@@ -225,7 +224,10 @@ class FoodActivity : AppCompatActivity()  {
                                     )
                                     Log.d(ContentValues.TAG, "new history : $history")
                                     db.collection("users")
-                                        .document(it1).update("history", history)
+                                        .document(it1).update(
+                                            "history", history,
+                                            "remainingCalories", remainingCalories.toString().toInt() - quantityNumber.toInt() * calories.toInt() / quantity.toInt()
+                                        )
                                         .addOnSuccessListener {
                                             Log.d(ContentValues.TAG, "DocumentSnapshot added")
                                             var i = Intent(
@@ -255,7 +257,10 @@ class FoodActivity : AppCompatActivity()  {
                                     )
                                     Log.d(ContentValues.TAG, "new history : $history")
                                     db.collection("users")
-                                        .document(it1).update("history", history)
+                                        .document(it1).update(
+                                            "history", history,
+                                            "remainingCalories", remainingCalories.toString().toInt() - quantityNumber.toInt() * calories.toInt() / quantity.toInt()
+                                        )
                                         .addOnSuccessListener {
                                             Log.d(ContentValues.TAG, "DocumentSnapshot added")
                                             var i = Intent(
@@ -269,8 +274,6 @@ class FoodActivity : AppCompatActivity()  {
                                             Log.w(ContentValues.TAG, "Error updating document", e)
                                         }
                                 }
-
-                            }
                         }
                 }
                 })

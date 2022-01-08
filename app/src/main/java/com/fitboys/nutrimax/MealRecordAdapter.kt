@@ -19,11 +19,9 @@ import java.io.IOException
 import java.util.HashMap
 
 
-class MealRecordAdapter(private val data: MutableList<HashMap<String, String>>) : RecyclerView.Adapter<MealRecordAdapter.ViewHolder>() {
+class MealRecordAdapter(private val data: MutableList<HashMap<String, String>>, private val listener: OnItemClickListener) : RecyclerView.Adapter<MealRecordAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        // inflates the card_view_design view
-        // that is used to hold list item
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.activity_single_meal_record_food, parent, false)
 
@@ -37,7 +35,6 @@ class MealRecordAdapter(private val data: MutableList<HashMap<String, String>>) 
         Log.d(ContentValues.TAG, "$food")
         Log.d(ContentValues.TAG, "${food["id"]}")
         holder.id.text = food["id"]
-
 
         val db = Firebase.firestore
 
@@ -64,22 +61,32 @@ class MealRecordAdapter(private val data: MutableList<HashMap<String, String>>) 
                     }
                 }
             }
-
-
-
     }
 
     override fun getItemCount(): Int {
         return data.size
     }
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
         var id: TextView = itemView.findViewById(R.id.id)
         var name: TextView = itemView.findViewById(R.id.name)
         var image: ImageView = itemView.findViewById(R.id.FoodImage)
         var image_path: TextView = itemView.findViewById(R.id.image)
 
+        init {
+            itemView.setOnClickListener(this)
+        }
+        override fun onClick(v: View?) {
+            val position = adapterPosition
+            if (position != RecyclerView.NO_POSITION) {
+                listener.onItemClick(position, this.name.text as String)
+            }
+        }
     }
+
+    interface OnItemClickListener {
+        fun onItemClick(position: Int, name: String)
+    }
+
+
 }
-
-
