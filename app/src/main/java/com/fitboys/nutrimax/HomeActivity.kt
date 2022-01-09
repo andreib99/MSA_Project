@@ -27,15 +27,18 @@ import android.text.style.UnderlineSpan
 
 import android.text.SpannableString
 import android.view.MenuItem
+import android.widget.Toast
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
 
 
 class HomeActivity : AppCompatActivity() {
-    private var mAuth: FirebaseAuth? = null
+    private var mAuth = FirebaseAuth.getInstance()
+    val db = Firebase.firestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
-        mAuth = FirebaseAuth.getInstance()
 
         val bottomNavigationView=findViewById<BottomNavigationView>(R.id.bottomNavigationView)
         val homeFragment= HomeFragment()
@@ -57,6 +60,55 @@ class HomeActivity : AppCompatActivity() {
         }
 
         bottomNavigationView.selectedItemId=R.id.home
+
+        mAuth.currentUser?.uid?.let {
+            db.collection("users")
+                .document(it).get().addOnSuccessListener { document ->
+                    if (document != null) {
+                        db.collection("notifications")
+                            .whereEqualTo("userId", document.id)
+                            .addSnapshotListener { value, e ->
+                                if (e != null) {
+                                    Log.w(TAG, "Listen failed.", e)
+                                    return@addSnapshotListener
+                                }
+
+                                val notifications = ArrayList<String>()
+                                for (doc in value!!) {
+                                    doc.getBoolean("read")?.let {
+                                            if (!it)
+                                            {
+                                                doc.getString("message")?.let {
+                                                    notifications.add(it)
+                                                }
+                                                db.collection("notifications")
+                                                    .document(doc.id).update("read", true)
+                                            }
+                                        }
+                                }
+                                if (notifications.count() == 1)
+                                {
+                                    Toast.makeText(
+                                        this@HomeActivity,
+                                        "You have a new notification!",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
+                                else
+                                {
+                                    if (notifications.count() >= 1)
+                                    {
+                                        Toast.makeText(
+                                            this@HomeActivity,
+                                            "You have ${notifications.count()} new notifications!",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                    }
+                                }
+                            }
+                    }
+                }
+        }
     }
 
     override fun onStart() {
