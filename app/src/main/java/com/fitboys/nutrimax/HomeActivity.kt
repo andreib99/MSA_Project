@@ -90,7 +90,7 @@ class HomeActivity : AppCompatActivity() {
                                 {
                                     Toast.makeText(
                                         this@HomeActivity,
-                                        "You have a new notification!",
+                                        notifications[0],
                                         Toast.LENGTH_SHORT
                                     ).show()
                                 }

@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.fitboys.nutrimax.data.model.Comment
 import com.fitboys.nutrimax.data.model.Food
+import com.fitboys.nutrimax.data.model.Notification
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -32,7 +33,9 @@ import org.w3c.dom.Text
 import java.io.File
 import java.io.IOException
 import java.lang.Exception
+import java.lang.StringBuilder
 import java.text.SimpleDateFormat
+import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
 import kotlin.collections.HashMap
@@ -40,6 +43,7 @@ import kotlin.collections.HashMap
 class FoodActivity : AppCompatActivity()  {
     private var mAuth: FirebaseAuth? = null
 
+    @RequiresApi(Build.VERSION_CODES.O)
     @SuppressLint("SetTextI18n", "SimpleDateFormat")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -473,6 +477,7 @@ class FoodActivity : AppCompatActivity()  {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     @SuppressLint("SimpleDateFormat")
     private fun addComment(foodId: String, UserId: String, newComment: EditText, foodName: TextView)
     {
@@ -505,6 +510,60 @@ class FoodActivity : AppCompatActivity()  {
                             Toast.LENGTH_SHORT
                         ).show()
                         newComment.text.clear()
+
+                        val message_words = message.split(' ')
+                        val currentDateTime = LocalDateTime.now()
+                        for (word in message_words)
+                        {
+                            if (word[0] == '@')
+                            {
+                                var username = StringBuilder()
+                                for (c in word)
+                                {
+                                    if (c in 'a'..'z' || c in 'A'..'Z' || c in '0'..'9')
+                                    {
+                                        username.append(c)
+                                    }
+                                }
+                                Log.d(ContentValues.TAG, "Username: $username")
+                                db.collection("users")
+                                    .whereEqualTo("username", username.toString())
+                                    .get()
+                                    .addOnSuccessListener { document ->
+                                        Log.d(ContentValues.TAG, "Documents: $document")
+                                        if (document.documents.size > 0) {
+                                            if(UserId != document.documents[0].id) {
+                                                val notification = Notification(
+                                                    document.documents[0].id,
+                                                    message = "Someone mentioned in a comment!",
+                                                    read = false,
+                                                    timestamp = currentDateTime.format(
+                                                        DateTimeFormatter.ISO_DATE
+                                                    )
+                                                )
+
+                                                db.collection("notifications")
+                                                    .add(notification)
+                                                    .addOnSuccessListener {
+                                                        Log.d(
+                                                            ContentValues.TAG,
+                                                            "DocumentSnapshot added"
+                                                        )
+                                                    }
+                                                    .addOnFailureListener { e ->
+                                                        Log.w(
+                                                            ContentValues.TAG,
+                                                            "Error adding document",
+                                                            e
+                                                        )
+                                                    }
+                                            }
+                                        }
+                                    }
+                            }
+                        }
+
+
                         var i = Intent(this@FoodActivity, FoodActivity::class.java)
                         i.putExtra("foodName", foodName.text)
                         startActivity(i)
