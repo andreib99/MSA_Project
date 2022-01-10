@@ -8,6 +8,7 @@ import android.content.Intent
 import android.graphics.BitmapFactory
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
 import android.text.TextUtils
 import android.util.Log
 import android.view.LayoutInflater
@@ -19,7 +20,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.fitboys.nutrimax.data.model.Comment
-import com.fitboys.nutrimax.data.model.Food
 import com.fitboys.nutrimax.data.model.Notification
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
@@ -29,7 +29,6 @@ import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
-import org.w3c.dom.Text
 import java.io.File
 import java.io.IOException
 import java.lang.Exception
@@ -39,6 +38,7 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
 import kotlin.collections.HashMap
+import kotlin.reflect.typeOf
 
 class FoodActivity : AppCompatActivity()  {
     private var mAuth: FirebaseAuth? = null
@@ -144,26 +144,42 @@ class FoodActivity : AppCompatActivity()  {
                     } catch (e: IOException) {
                         e.printStackTrace()
                     }
+                    //val currentUser = mAuth!!.currentUser?.uid
+                    // Log.e(TAG, "Rating = ${ratings[currentUser.toString()] is Int}")
+                    // val ratingUser: Int? = ratings[currentUser.toString()]
+                    //if (ratingUser != null)
+                    //{
+                    val currentUser = mAuth!!.currentUser?.uid
+                    Log.e(TAG, "User = $currentUser")
+                    if (currentUser != "")
+                    {
+                        initStars(ratings.getOrDefault(currentUser.toString(), 0), star1, star2, star3, star4, star5)
 
-                    initStars(rating.toDouble(), star1, star2, star3, star4, star5)
+                    }
+                    //}
 
-                    val query = FirebaseFirestore.getInstance()
-                        .collection("comments").whereEqualTo("foodId", foodId).orderBy("date")
+                    val handler = Handler()
+                    handler.postDelayed({
+                        val query = FirebaseFirestore.getInstance()
+                            .collection("comments").whereEqualTo("foodId", foodId).orderBy("date")
 
-                    query.get().addOnCompleteListener(OnCompleteListener<QuerySnapshot?> { task ->
-                        if (task.exception != null) {
-                            Log.w(TAG, "get:error" + task.exception!!.message)
-                        }
-                    })
+                        query.get().addOnCompleteListener(OnCompleteListener<QuerySnapshot?> { task ->
+                            if (task.exception != null) {
+                                Log.w(TAG, "get:error" + task.exception!!.message)
+                            }
+                        })
 
-                    val options: FirestoreRecyclerOptions<Comment> = FirestoreRecyclerOptions.Builder<Comment>()
-                        .setQuery(query, Comment::class.java)
-                        .setLifecycleOwner(this)
-                        .build()
+                        val options: FirestoreRecyclerOptions<Comment> = FirestoreRecyclerOptions.Builder<Comment>()
+                            .setQuery(query, Comment::class.java)
+                            .setLifecycleOwner(this)
+                            .build()
 
-                    val adapter = CommentAdapter(options)
+                        val adapter = CommentAdapter(options)
 
-                    recyclerView?.adapter = adapter
+                        recyclerView?.adapter = adapter
+                    }, 1000)
+
+
 
 
                 }
@@ -213,6 +229,7 @@ class FoodActivity : AppCompatActivity()  {
                     db.collection("users")
                         .document(it1).get().addOnSuccessListener{ document ->
                                 val remainingCalories = document.data?.get("remainingCalories")
+                                val username = document.data?.get("username")
                                 if(history[currentDateTime.format(Date())].isNullOrEmpty()) {
                                     Log.d(ContentValues.TAG, "Emptyyyy")
 
@@ -233,6 +250,46 @@ class FoodActivity : AppCompatActivity()  {
                                             "remainingCalories", remainingCalories.toString().toInt() - quantityNumber.toInt() * calories.toInt() / quantity.toInt()
                                         )
                                         .addOnSuccessListener {
+
+                                            if(remainingCalories.toString().toInt() - quantityNumber.toInt() * calories.toInt() / quantity.toInt() < 0)
+                                            {
+                                                val currentDateTime = LocalDateTime.now()
+                                                db.collection("users")
+                                                    .whereEqualTo("username", username.toString())
+                                                    .get()
+                                                    .addOnSuccessListener { document ->
+                                                        Log.d(ContentValues.TAG, "Documents: $document")
+                                                        if (document.documents.size > 0) {
+                                                            if(it1 == document.documents[0].id) {
+                                                                val notification = Notification(
+                                                                    document.documents[0].id,
+                                                                    message = "You exceeded the necessary calories intake!",
+                                                                    read = false,
+                                                                    timestamp = currentDateTime.format(
+                                                                        DateTimeFormatter.ISO_DATE
+                                                                    )
+                                                                )
+
+                                                                db.collection("notifications")
+                                                                    .add(notification)
+                                                                    .addOnSuccessListener {
+                                                                        Log.d(
+                                                                            ContentValues.TAG,
+                                                                            "DocumentSnapshot added"
+                                                                        )
+                                                                    }
+                                                                    .addOnFailureListener { e ->
+                                                                        Log.w(
+                                                                            ContentValues.TAG,
+                                                                            "Error adding document",
+                                                                            e
+                                                                        )
+                                                                    }
+                                                            }
+                                                        }
+                                                    }
+                                            }
+
                                             Log.d(ContentValues.TAG, "DocumentSnapshot added")
                                             var i = Intent(
                                                 this@FoodActivity,
@@ -266,6 +323,46 @@ class FoodActivity : AppCompatActivity()  {
                                             "remainingCalories", remainingCalories.toString().toInt() - quantityNumber.toInt() * calories.toInt() / quantity.toInt()
                                         )
                                         .addOnSuccessListener {
+
+                                            if(remainingCalories.toString().toInt() - quantityNumber.toInt() * calories.toInt() / quantity.toInt() < 0)
+                                            {
+                                                val currentDateTime = LocalDateTime.now()
+                                                db.collection("users")
+                                                    .whereEqualTo("username", username.toString())
+                                                    .get()
+                                                    .addOnSuccessListener { document ->
+                                                        Log.d(ContentValues.TAG, "Documents: $document")
+                                                        if (document.documents.size > 0) {
+                                                            if(it1 == document.documents[0].id) {
+                                                                val notification = Notification(
+                                                                    document.documents[0].id,
+                                                                    message = "You exceeded the necessary calories intake!",
+                                                                    read = false,
+                                                                    timestamp = currentDateTime.format(
+                                                                        DateTimeFormatter.ISO_DATE
+                                                                    )
+                                                                )
+
+                                                                db.collection("notifications")
+                                                                    .add(notification)
+                                                                    .addOnSuccessListener {
+                                                                        Log.d(
+                                                                            ContentValues.TAG,
+                                                                            "DocumentSnapshot added"
+                                                                        )
+                                                                    }
+                                                                    .addOnFailureListener { e ->
+                                                                        Log.w(
+                                                                            ContentValues.TAG,
+                                                                            "Error adding document",
+                                                                            e
+                                                                        )
+                                                                    }
+                                                            }
+                                                        }
+                                                    }
+                                            }
+
                                             Log.d(ContentValues.TAG, "DocumentSnapshot added")
                                             var i = Intent(
                                                 this@FoodActivity,
@@ -307,7 +404,7 @@ class FoodActivity : AppCompatActivity()  {
                             db.collection("foods")
                                 .document(foodId).update("rating", finalRating)
 
-                            initStars(finalRating, star1, star2, star3, star4, star5)
+                            initStars(1, star1, star2, star3, star4, star5)
                         }
 
                     }
@@ -337,7 +434,7 @@ class FoodActivity : AppCompatActivity()  {
                             db.collection("foods")
                                 .document(foodId).update("rating", finalRating)
 
-                            initStars(finalRating, star1, star2, star3, star4, star5)
+                            initStars(2, star1, star2, star3, star4, star5)
                         }
                     }
                 }
@@ -364,7 +461,7 @@ class FoodActivity : AppCompatActivity()  {
                             db.collection("foods")
                                 .document(foodId).update("rating", finalRating)
 
-                            initStars(finalRating, star1, star2, star3, star4, star5)
+                            initStars(3, star1, star2, star3, star4, star5)
                         }
                     }
                 }
@@ -393,7 +490,7 @@ class FoodActivity : AppCompatActivity()  {
                                 db.collection("foods")
                                 .document(foodId).update("rating", finalRating)
 
-                            initStars(finalRating, star1, star2, star3, star4, star5)
+                            initStars(4, star1, star2, star3, star4, star5)
                         }
                     }
                 }
@@ -421,7 +518,7 @@ class FoodActivity : AppCompatActivity()  {
                             db.collection("foods")
                                 .document(foodId).update("rating", finalRating)
 
-                            initStars(finalRating, star1, star2, star3, star4, star5)
+                            initStars(5, star1, star2, star3, star4, star5)
                         }
                     }
                 }
@@ -436,44 +533,25 @@ class FoodActivity : AppCompatActivity()  {
         star5.setImageResource(R.drawable.star_unfilled)
     }
 
-    fun initStars(rating : Double, star1 : ImageView, star2 : ImageView, star3 : ImageView, star4 : ImageView, star5 : ImageView)
+    fun initStars(rating: Int, star1: ImageView, star2: ImageView, star3: ImageView, star4: ImageView, star5: ImageView)
     {
-        setStarsToEmpty(star1, star2, star3, star4, star5)
-        if (rating >= 1)
-        {
-            star1.setImageResource(R.drawable.star_filled)
-        }
-        if (rating > 1 && rating < 2)
-        {
-            star2.setImageResource(R.drawable.star_half_filled)
-        }
-        if (rating >= 2)
-        {
-            star2.setImageResource(R.drawable.star_filled)
-        }
-        if (rating > 2 && rating < 3)
-        {
-            star3.setImageResource(R.drawable.star_half_filled)
-        }
-        if (rating >= 3)
-        {
-            star3.setImageResource(R.drawable.star_filled)
-        }
-        if (rating > 3 && rating < 4)
-        {
-            star4.setImageResource(R.drawable.star_half_filled)
-        }
-        if (rating >= 4)
-        {
-            star4.setImageResource(R.drawable.star_filled)
-        }
-        if (rating > 4 && rating < 5)
-        {
-            star5.setImageResource(R.drawable.star_half_filled)
-        }
-        if (rating == 5.0)
-        {
-            star5.setImageResource(R.drawable.star_filled)
+        if(rating != 0) {
+            setStarsToEmpty(star1, star2, star3, star4, star5)
+            if (rating >= 1) {
+                star1.setImageResource(R.drawable.star_filled)
+            }
+            if (rating >= 2) {
+                star2.setImageResource(R.drawable.star_filled)
+            }
+            if (rating >= 3) {
+                star3.setImageResource(R.drawable.star_filled)
+            }
+            if (rating >= 4) {
+                star4.setImageResource(R.drawable.star_filled)
+            }
+            if (rating >= 5) {
+                star5.setImageResource(R.drawable.star_filled)
+            }
         }
     }
 
@@ -539,7 +617,8 @@ class FoodActivity : AppCompatActivity()  {
                                                     read = false,
                                                     timestamp = currentDateTime.format(
                                                         DateTimeFormatter.ISO_DATE
-                                                    )
+                                                    ),
+                                                    link = foodName.text.toString()
                                                 )
 
                                                 db.collection("notifications")
@@ -562,7 +641,6 @@ class FoodActivity : AppCompatActivity()  {
                                     }
                             }
                         }
-
 
                         var i = Intent(this@FoodActivity, FoodActivity::class.java)
                         i.putExtra("foodName", foodName.text)

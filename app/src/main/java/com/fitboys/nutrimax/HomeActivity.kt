@@ -5,31 +5,19 @@ import ProfileFragment
 import SettingsFragment
 import android.content.ContentValues.TAG
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
-import android.transition.TransitionManager
 import android.util.Log
-import android.view.View
-import android.widget.Button
-import android.widget.TextView
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentPagerAdapter
-import androidx.viewpager.widget.ViewPager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import android.text.style.UnderlineSpan
-
-import android.text.SpannableString
 import android.view.MenuItem
 import android.widget.Toast
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.firestore.DocumentChange
 
 
 class HomeActivity : AppCompatActivity() {
@@ -40,64 +28,64 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
-        val bottomNavigationView=findViewById<BottomNavigationView>(R.id.bottomNavigationView)
-        val homeFragment= HomeFragment()
-        val profileFragment=ProfileFragment()
-        val settingsFragment=SettingsFragment()
+        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
+        val homeFragment = HomeFragment()
+        val profileFragment = ProfileFragment()
+        val settingsFragment = SettingsFragment()
 
 
         setCurrentFragment(homeFragment)
 
 
-        bottomNavigationView.setOnItemSelectedListener{
+        bottomNavigationView.setOnItemSelectedListener {
             underlineItem(it);
-            when(it.itemId){
-                R.id.home->setCurrentFragment(homeFragment)
-                R.id.profile->setCurrentFragment(profileFragment)
-                R.id.settings->setCurrentFragment(settingsFragment)
+            when (it.itemId) {
+                R.id.home -> setCurrentFragment(homeFragment)
+                R.id.profile -> setCurrentFragment(profileFragment)
+                R.id.settings -> setCurrentFragment(settingsFragment)
             }
             true
         }
 
-        bottomNavigationView.selectedItemId=R.id.home
+        bottomNavigationView.selectedItemId = R.id.home
 
         mAuth.currentUser?.uid?.let {
             db.collection("users")
                 .document(it).get().addOnSuccessListener { document ->
                     if (document != null) {
                         db.collection("notifications")
-                            .whereEqualTo("userId", document.id)
+                            .whereEqualTo("userId", it)
+                            .whereEqualTo("read", false)
                             .addSnapshotListener { value, e ->
                                 if (e != null) {
                                     Log.w(TAG, "Listen failed.", e)
                                     return@addSnapshotListener
                                 }
-
-                                val notifications = ArrayList<String>()
-                                for (doc in value!!) {
-                                    doc.getBoolean("read")?.let {
-                                            if (!it)
-                                            {
-                                                doc.getString("message")?.let {
-                                                    notifications.add(it)
-                                                }
-                                                db.collection("notifications")
-                                                    .document(doc.id).update("read", true)
-                                            }
-                                        }
+                                if (value != null) {
+                                    Log.e(TAG, "Value count: ${value.count()}")
                                 }
-                                if (notifications.count() == 1)
-                                {
+                                val notifications = ArrayList<String>()
+                                if (value != null) {
+                                    for (doc in value.documentChanges) {
+                                        if (doc.type == DocumentChange.Type.ADDED)
+                                        {
+                                            doc.document.getString("message")?.let {
+                                                notifications.add(it)
+                                            }
+                                            db.collection("notifications")
+                                                .document(doc.document.id).update("read", true)
+                                        }
+                                    }
+                                }
+                                if (notifications.count() == 1) {
+                                    Log.e(TAG, "Notifications: $notifications")
                                     Toast.makeText(
                                         this@HomeActivity,
                                         notifications[0],
                                         Toast.LENGTH_SHORT
                                     ).show()
-                                }
-                                else
-                                {
-                                    if (notifications.count() >= 1)
-                                    {
+                                } else {
+                                    if (notifications.count() > 1) {
                                         Toast.makeText(
                                             this@HomeActivity,
                                             "You have ${notifications.count()} new notifications!",
@@ -108,6 +96,7 @@ class HomeActivity : AppCompatActivity() {
                             }
                     }
                 }
+
         }
     }
 
