@@ -571,10 +571,11 @@ class FoodActivity : AppCompatActivity()  {
             val currentDateTime = SimpleDateFormat("yyyy.MM.dd 'at' HH:mm:ss")
             val db = Firebase.firestore
             mAuth?.currentUser?.uid?.let {
+                val currentUser = it
             db.collection("comments")
                     .add(
                         Comment(
-                            UserId,
+                            currentUser,
                             foodId,
                             message,
                             currentDateTime.format(Date()),
@@ -610,7 +611,7 @@ class FoodActivity : AppCompatActivity()  {
                                     .addOnSuccessListener { document ->
                                         Log.d(ContentValues.TAG, "Documents: $document")
                                         if (document.documents.size > 0) {
-                                            if(UserId != document.documents[0].id) {
+                                            if(currentUser != document.documents[0].id) {
                                                 val notification = Notification(
                                                     document.documents[0].id,
                                                     message = "Someone mentioned in a comment!",
