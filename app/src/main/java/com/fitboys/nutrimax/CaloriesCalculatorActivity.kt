@@ -3,6 +3,7 @@ package com.fitboys.nutrimax
 import android.content.ContentValues
 import android.content.Intent
 import android.graphics.Color
+import android.os.Build
 
 import com.google.firebase.auth.FirebaseAuth
 
@@ -19,6 +20,7 @@ import com.google.firebase.ktx.Firebase
 import java.util.*
 import android.widget.ArrayAdapter
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.core.content.ContentProviderCompat.requireContext
 
 
@@ -26,6 +28,7 @@ class CaloriesCalculatorActivity : AppCompatActivity() {
 
     private var mAuth: FirebaseAuth? = null
 
+    @RequiresApi(Build.VERSION_CODES.N)
     override fun onResume(){
         super.onResume();
 
@@ -72,6 +75,7 @@ class CaloriesCalculatorActivity : AppCompatActivity() {
 
     }
 
+    @RequiresApi(Build.VERSION_CODES.N)
     private fun updateUserProfile(
         etWeight: EditText,
         etHeight: EditText,
@@ -112,27 +116,43 @@ class CaloriesCalculatorActivity : AppCompatActivity() {
             else -> {
                 val result_calories = calculateCalories(weight, height, age, gender, activity_level, target)
                 val db = Firebase.firestore
+                var remainingCalories = 0
                 mAuth?.currentUser?.uid?.let {
                     db.collection("users")
-                        .document(it).update(
-                            mapOf(
-                                "weight" to weight,
-                                "height" to height,
-                                "age" to age,
-                                "gender" to gender,
-                                "activityLevel" to activity_level,
-                                "caloriesIntake" to result_calories,
-                                "remainingCalories" to result_calories,
-                            )
-                        )
-                        .addOnSuccessListener {
-                            Log.d(ContentValues.TAG, "DocumentSnapshot updated")
-                        }
-                        .addOnFailureListener { e ->
-                            Log.w(ContentValues.TAG, "Error updating document", e)
+                        .document(it).get()
+                        .addOnSuccessListener { document ->
+                            remainingCalories = document.data?.get("remainingCalories").toString().toInt()
+                            if (remainingCalories == 0)
+                            {
+                                remainingCalories = result_calories
+                            }
+
+                            Log.d(ContentValues.TAG, "remainingCalories: $remainingCalories")
+
+                            mAuth?.currentUser?.uid?.let {
+                                db.collection("users")
+                                    .document(it).update(
+                                        mapOf(
+                                            "weight" to weight,
+                                            "height" to height,
+                                            "age" to age,
+                                            "gender" to gender,
+                                            "activityLevel" to activity_level,
+                                            "caloriesIntake" to result_calories,
+                                            "remainingCalories" to remainingCalories,
+                                        )
+                                    )
+                                    .addOnSuccessListener {
+                                        Log.d(ContentValues.TAG, "DocumentSnapshot updated")
+                                    }
+                                    .addOnFailureListener { e ->
+                                        Log.w(ContentValues.TAG, "Error updating document", e)
+                                    }
+                            }
+                            startActivity(Intent(this@CaloriesCalculatorActivity, HomeActivity::class.java))
                         }
                 }
-                startActivity(Intent(this@CaloriesCalculatorActivity, HomeActivity::class.java))
+
             }
         }
     }
