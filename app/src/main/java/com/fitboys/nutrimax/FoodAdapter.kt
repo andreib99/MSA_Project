@@ -12,9 +12,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.fitboys.nutrimax.data.model.Food
 import android.view.LayoutInflater
-import android.widget.AdapterView
 import android.widget.ImageView
-import androidx.core.content.ContextCompat.startActivity
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.storage.FirebaseStorage

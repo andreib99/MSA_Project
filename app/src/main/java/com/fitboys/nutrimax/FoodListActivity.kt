@@ -95,11 +95,12 @@ class FoodListActivity : AppCompatActivity(), FoodAdapter.OnItemClickListener{
                 return false
             }
 
-            override fun onQueryTextChange(newText: String?): Boolean {
+            override fun onQueryTextChange(newText: String): Boolean {
                 if (newText != "") {
                     val query = FirebaseFirestore.getInstance()
-                        .collection("foods").orderBy("name").startAt(newText?.uppercase())
-                        .endAt(newText?.lowercase() +"\uf8ff")
+                        .collection("foods").orderBy("name")
+                        .whereGreaterThanOrEqualTo("name", newText)
+                        .whereLessThanOrEqualTo("name", newText +"\uf8ff")
                     val options: FirestoreRecyclerOptions<Food> = FirestoreRecyclerOptions.Builder<Food>()
                         .setQuery(query, Food::class.java)
                         .setLifecycleOwner(this@FoodListActivity)
