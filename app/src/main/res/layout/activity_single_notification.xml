@@ -1,25 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginStart="12dp"
+    android:layout_marginEnd="12dp"
     android:layout_marginBottom="4dp"
-    app:cardCornerRadius="4dp"
+    android:background="@drawable/rounded_corner"
     android:clickable="true"
     android:focusable="true"
     android:onClick="testing"
-    >
+    android:orientation="vertical"
+    app:cardCornerRadius="4dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraint3"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:background="@drawable/rounded_corner"
+        android:layout_height="match_parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvMeals">
@@ -29,46 +26,49 @@
             android:id="@+id/timestamp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="4dp"
+            android:text="2022/01/01"
             android:textColor="@color/black"
             android:textSize="15sp"
-            android:text="2022/01/01"
             android:textStyle="bold|italic"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="4dp"
+            android:text="You have a new notification"
             android:textColor="@color/black"
             android:textSize="20sp"
-            android:text="You have a new notification"
             android:textStyle="bold|italic"
-            app:layout_constraintTop_toBottomOf="@+id/timestamp"
             app:layout_constraintStart_toStartOf="@+id/constraint3"
-             />
+            app:layout_constraintTop_toBottomOf="@+id/timestamp" />
+
         <TextView
             android:id="@+id/userId"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
             android:textSize="20sp"
-            android:visibility="invisible"
             android:textStyle="bold|italic"
-            app:layout_constraintTop_toBottomOf="@+id/message"
+            android:visibility="invisible"
             app:layout_constraintStart_toStartOf="@+id/constraint3"
-            />
+            app:layout_constraintTop_toBottomOf="@+id/message" />
+
         <TextView
             android:id="@+id/link"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
             android:textSize="20sp"
-            android:visibility="invisible"
             android:textStyle="bold|italic"
-            app:layout_constraintTop_toBottomOf="@+id/message"
+            android:visibility="invisible"
             app:layout_constraintStart_toStartOf="@+id/constraint3"
-            />
+            app:layout_constraintTop_toBottomOf="@+id/message" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
