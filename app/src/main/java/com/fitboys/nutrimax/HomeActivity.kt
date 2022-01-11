@@ -66,7 +66,8 @@ class HomeActivity : AppCompatActivity() {
                                         var notificationsCount = document.documents.count()
                                         notificationsCounter = notificationsCount
                                         Log.e(TAG, "notificationsCount: ${notificationsCount}")
-                                        badge.text = notificationsCount.toString()
+                                        var nots= " $notificationsCount "
+                                        badge.text = nots
                                         if (notificationsCount != 0)
                                         {
                                             badge.visibility = View.VISIBLE;

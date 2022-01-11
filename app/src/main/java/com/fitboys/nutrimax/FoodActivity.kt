@@ -614,7 +614,7 @@ class FoodActivity : AppCompatActivity()  {
                                             if(currentUser != document.documents[0].id) {
                                                 val notification = Notification(
                                                     document.documents[0].id,
-                                                    message = "Someone mentioned in a comment!",
+                                                    message = "Someone mentioned you in a comment!",
                                                     read = false,
                                                     timestamp = currentDateTime.format(
                                                         DateTimeFormatter.ISO_DATE

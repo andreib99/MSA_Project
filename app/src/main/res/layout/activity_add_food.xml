@@ -14,11 +14,13 @@
         android:layout_height="match_parent"
         android:layout_gravity="center"
 
+        android:layout_marginTop="5dp"
         android:orientation="vertical">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
             android:gravity="center_horizontal"
             android:text="Add Food"
             android:textColor="@color/black"
@@ -59,31 +61,30 @@
             android:textSize="20sp" />
 
 
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etQuantity"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:hint="Quantity"
-                android:layout_gravity="center"
-                android:layout_marginStart="15dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="12dp"
-                android:layout_marginEnd="15dp"
-                android:layout_marginRight="15dp"
-                android:layout_marginBottom="12dp"
-                android:background="@drawable/rounded_corner"
-                android:clickable="true"
-                android:cursorVisible="true"
-                android:ems="10"
-                android:focusable="true"
-                android:gravity="center|left"
-                android:inputType="number"
-                android:paddingStart="20dp"
-                android:paddingLeft="20dp"
-                android:textColor="#000000"
-                android:textColorHint="#575656"
-                android:textSize="20sp"/>
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etQuantity"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/rounded_corner"
+            android:clickable="true"
+            android:cursorVisible="true"
+            android:ems="10"
+            android:focusable="true"
+            android:gravity="center|left"
+            android:hint="Quantity"
+            android:inputType="number"
+            android:paddingStart="20dp"
+            android:paddingLeft="20dp"
+            android:textColor="#000000"
+            android:textColorHint="#575656"
+            android:textSize="20sp" />
 
 
         <com.google.android.material.textfield.TextInputEditText
@@ -212,7 +213,8 @@
                 android:id="@+id/btnAddFood"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="20dp"
                 android:background="@drawable/rounded_corner"
                 android:text="Add"
                 android:textColor="@color/black"

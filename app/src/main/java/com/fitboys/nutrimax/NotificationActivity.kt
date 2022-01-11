@@ -87,7 +87,7 @@ class NotificationActivity: AppCompatActivity(), NotificationAdapter.OnItemClick
         }
         else
         {
-            if(message == "Someone mentioned in a comment!")
+            if(message == "Someone mentioned you in a comment!")
             {
                 i = Intent(this@NotificationActivity, FoodActivity::class.java)
                 i.putExtra("foodName", link)

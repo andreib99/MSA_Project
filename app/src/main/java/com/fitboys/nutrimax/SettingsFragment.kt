@@ -33,7 +33,8 @@ class SettingsFragment : Fragment(R.layout.fragment_settings){
         val counter = bundle!!.getString("notificationsCount")
         if (counter != null) {
             if(counter.toInt() != 0) {
-                badge_settings.text = counter
+                var nots=" $counter "
+                badge_settings.text = nots
                 badge_settings.visibility = View.VISIBLE;
             }
         }
