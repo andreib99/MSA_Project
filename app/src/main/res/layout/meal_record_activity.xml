@@ -66,7 +66,7 @@
                 style="@style/CircularDeterminateProgressBar"
                 android:layout_width="0dp"
                 android:layout_height="140dp"
-                android:progress="73"
+                android:progress="0"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHeight_percent="0.5"
@@ -87,14 +87,14 @@
                 app:layout_constraintEnd_toEndOf="@+id/progressBar"
                 app:layout_constraintStart_toStartOf="@+id/progressBar"
                 app:layout_constraintTop_toTopOf="@+id/progressBar"
-                tools:text="60%" />
+                tools:text="0%" />
 
 
             <TextView
                 android:id="@+id/textView7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="3000"
+                android:text="0"
                 android:textColor="@color/black"
                 android:textSize="56sp"
                 android:textStyle="bold"
@@ -171,7 +171,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25dp"
-                android:text="100g"
+                android:text="0g"
                 android:textColor="@color/white"
                 android:textSize="20sp"
                 app:layout_constraintStart_toEndOf="@+id/textView13"
@@ -195,7 +195,7 @@
                 android:id="@+id/fats"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="100g"
+                android:text="0g"
                 android:textColor="@color/white"
                 android:textSize="20sp"
                 app:layout_constraintStart_toEndOf="@+id/textView14"
@@ -232,7 +232,7 @@
                 android:id="@+id/carbo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="100g"
+                android:text="0g"
                 android:textColor="@color/white"
                 android:textSize="20sp"
                 app:layout_constraintStart_toEndOf="@+id/textView15"

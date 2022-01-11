@@ -1,3 +1,4 @@
+import android.annotation.SuppressLint
 import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
@@ -17,6 +18,8 @@ import com.fitboys.nutrimax.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class HomeFragment:Fragment(R.layout.fragment_home_fragment) {
@@ -31,6 +34,7 @@ class HomeFragment:Fragment(R.layout.fragment_home_fragment) {
         return super.onCreateView(inflater, container, savedInstanceState)
     }
 
+    @SuppressLint("SimpleDateFormat")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -61,7 +65,13 @@ class HomeFragment:Fragment(R.layout.fragment_home_fragment) {
                 startActivity(Intent(requireContext(), AddFoodActivity::class.java))
             }
             seeRecord.setOnClickListener{ view ->
-                startActivity(Intent(requireContext(), MealRecordActivity::class.java))
+                val currentDateTime = SimpleDateFormat("yyyy.MM.dd")
+                var i = Intent(
+                    requireContext(),
+                    MealRecordActivity::class.java
+                )
+                i.putExtra("date", currentDateTime.format(Date()))
+                startActivity(i)
             }
         }
     }
