@@ -16,6 +16,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import android.view.MenuItem
+import android.view.View
+import android.widget.TextView
 import android.widget.Toast
 import com.google.firebase.firestore.DocumentChange
 
@@ -23,12 +25,13 @@ import com.google.firebase.firestore.DocumentChange
 class HomeActivity : AppCompatActivity() {
     private var mAuth = FirebaseAuth.getInstance()
     val db = Firebase.firestore
-
+    var notificationsCounter = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
+        val badge = findViewById<TextView>(R.id.badge)
         val homeFragment = HomeFragment()
         val profileFragment = ProfileFragment()
         val settingsFragment = SettingsFragment()
@@ -57,6 +60,23 @@ class HomeActivity : AppCompatActivity() {
                             .whereEqualTo("userId", it)
                             .whereEqualTo("read", false)
                             .addSnapshotListener { value, e ->
+                                db.collection("notifications")
+                                    .whereEqualTo("userId", it)
+                                    .get().addOnSuccessListener { document ->
+                                        var notificationsCount = document.documents.count()
+                                        notificationsCounter = notificationsCount
+                                        Log.e(TAG, "notificationsCount: ${notificationsCount}")
+                                        badge.text = notificationsCount.toString()
+                                        if (notificationsCount != 0)
+                                        {
+                                            badge.visibility = View.VISIBLE;
+                                        }
+                                        else
+                                        {
+                                            badge.visibility = View.INVISIBLE;
+                                        }
+                                    }
+
                                 if (e != null) {
                                     Log.w(TAG, "Listen failed.", e)
                                     return@addSnapshotListener
@@ -110,6 +130,9 @@ class HomeActivity : AppCompatActivity() {
 
     private fun setCurrentFragment(fragment: Fragment)=
         supportFragmentManager.beginTransaction().apply {
+            val bundle = Bundle()
+            bundle.putString("notificationsCount", notificationsCounter.toString())
+            fragment.arguments = bundle
             replace(R.id.flFragment,fragment)
             commit()
         }
