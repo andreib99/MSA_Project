@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.fitboys.nutrimax.LoginActivity
 import com.fitboys.nutrimax.NotificationActivity
@@ -25,7 +26,17 @@ class SettingsFragment : Fragment(R.layout.fragment_settings){
         super.onViewCreated(view, savedInstanceState)
 
         val btnNotifications = view.findViewById<Button>(R.id.btnNotifications);
+        val badge_settings = view.findViewById<TextView>(R.id.badge_settings);
         val btnLogout = view.findViewById<Button>(R.id.btnLogout)
+
+        val bundle = arguments
+        val counter = bundle!!.getString("notificationsCount")
+        if (counter != null) {
+            if(counter.toInt() != 0) {
+                badge_settings.text = counter
+                badge_settings.visibility = View.VISIBLE;
+            }
+        }
 
         btnNotifications.setOnClickListener(View.OnClickListener {view: View? ->
             startActivity(Intent(requireContext(), NotificationActivity::class.java))
